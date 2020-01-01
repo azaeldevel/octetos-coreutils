@@ -16,26 +16,26 @@ lib_LTLIBRARIES = liboctetos-coreutils.la
 
 bin_PROGRAMS = develop
 
-develop_SOURCES = develop.cc uname.cc
+
 
 liboctetos_coreutils_la_SOURCES = \
-	lib.c
-
+	uname.cc \
+	Apishell.cc
 liboctetos_coreutils_la_LDFLAGS = 
-
-liboctetos_coreutils_la_LIBADD = $(OCTETOS_COREUTILS_LIBS)
-
-
+liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
+liboctetos_coreutils_la_LIBADD = $(OCTETOS_COREUTILS_LIBS) $(OCTETOS_CORE_LIBS)
 if PLATFORM_WIN32
 liboctetos_coreutils_la_LDFLAGS += -no-undefined
 endif
-
 if NATIVE_WIN32
 liboctetos_coreutils_la_LDFLAGS += -export-dynamic
 endif
 
+develop_LDADD =  $(OCTETOS_CORE_LIBS) liboctetos-coreutils.la 
+develop_SOURCES = develop.cc 
+
 include_HEADERS = \
-	octetos_coreutils.h
+	uname.hh
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = octetos-coreutils.pc

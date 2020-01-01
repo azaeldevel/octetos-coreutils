@@ -7,7 +7,7 @@
 
 
 #include "uname.hh"
-
+#include "Apishell.hh"
 
 int main(void) {
 
@@ -36,7 +36,10 @@ int main(void) {
 	std::cout << "Node Name : " << u.get_kernel_release() << "\n";
 	std::cout << "Node Name : " << u.get_kernel_version() << "\n";
 	std::cout << "Node Name : " << u.get_machine() << "\n";
-		
+
+	coreutils::Apishell ash;
+	std::list<std::string> dirs;
+	ash.ls("/home/azael",dirs);
 
    return EXIT_SUCCESS;
 }

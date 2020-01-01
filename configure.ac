@@ -57,7 +57,7 @@ LT_INIT([win32-dll])
 
 PKG_CHECK_MODULES(OCTETOS_COREUTILS, [cunit ])
 
-
+PKG_CHECK_MODULES(OCTETOS_CORE, [octetos-core])
 
 
 AC_OUTPUT([
