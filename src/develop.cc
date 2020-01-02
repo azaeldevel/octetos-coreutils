@@ -5,8 +5,6 @@
 #include <sys/utsname.h>
 #include <iostream>
 
-
-#include "uname.hh"
 #include "Apishell.hh"
 
 int main(void) {

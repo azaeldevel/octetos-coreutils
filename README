@@ -1,0 +1,2 @@
+octetos::coreutils es una libreria capaz de realizar algunas de las funcion del
+paquete coreutils pero a travez de una API C++.

@@ -37,8 +37,8 @@ endif
 develop_LDADD =  $(OCTETOS_CORE_LIBS) liboctetos-coreutils.la 
 develop_SOURCES = develop.cc 
 
-include_HEADERS = \
-	uname.hh
+octetos_core_includedir = $(includedir)/octetos/coreutils
+octetos_core_include_HEADERS = Apishell.hh
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = octetos-coreutils.pc

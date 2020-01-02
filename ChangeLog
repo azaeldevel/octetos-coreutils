@@ -1,2 +1,6 @@
-
+v0.1.0-alpha
+	- Implemetacion para uname
+	- Implemetacion para ls
+	- Implemetacion para cd
+	- Implemetacion para mkdir
 

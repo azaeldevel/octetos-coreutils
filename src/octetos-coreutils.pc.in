@@ -3,11 +3,11 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 datarootdir=@datarootdir@
 datadir=@datadir@
-includedir=@includedir@/liboctetos_coreutils-0.1.0-alpha
+includedir=@includedir@/include
 
 Name: liboctetos_coreutils
-Description: Sample library created by Anjuta project wizard.
+Description: API C++ con algunas capacidades de coreutils.
 Version: @VERSION@
 Requires: 
-Libs: -L${libdir} -loctetos_coreutils
+Libs: -L${libdir} -loctetos-coreutils
 Cflags: -I${includedir}

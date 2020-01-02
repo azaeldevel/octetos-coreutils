@@ -1,6 +1,5 @@
 
 
-
 #include "Apishell.hh"
 
 namespace coreutils
@@ -20,7 +19,6 @@ namespace coreutils
 	{
 		closedir(actualDir);
 	}
-	
 
 
 
