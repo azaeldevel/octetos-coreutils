@@ -26,6 +26,10 @@ int main(void) {
 	{
 		std::cout << "Diretory Name : " << d << "\n";
 	}*/
-	ash.mkdir("dir.arm");
+	std::string dir = "dir.arm";
+	//ash.mkdir(dir);
+
+	//if(ash.rmdir(dir)) std::cout << "Se elimino '" << dir << "\n";
+	//else std::cout << "No se elimino '" << dir << "\n";
    return EXIT_SUCCESS;
 }

@@ -23,7 +23,8 @@ liboctetos_coreutils_la_SOURCES = \
 	Apishell.cc \
 	cd.cc \
 	ls.cc \
-	mkdir.cc	
+	mkdir.cc \
+	rmdir.cc
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(OCTETOS_COREUTILS_LIBS) $(OCTETOS_CORE_LIBS)
