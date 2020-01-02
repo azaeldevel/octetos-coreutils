@@ -11,35 +11,23 @@
 
 int main(void) {
 
-   struct utsname buffer;
 
-   errno = 0;
-   if (uname(&buffer) != 0) {
-      perror("uname");
-      exit(EXIT_FAILURE);
-   }
-
-   printf("system name = %s\n", buffer.sysname);
-   printf("node name   = %s\n", buffer.nodename);
-   printf("release     = %s\n", buffer.release);
-   printf("version     = %s\n", buffer.version);
-   printf("machine     = %s\n", buffer.machine);
-
-   #ifdef _GNU_SOURCE
-      printf("domain name = %s\n", buffer.domainname);
-   #endif
-
-	std::cout << "\n";
+	/*std::cout << "\n";
 	coreutils::uname u;
 	std::cout << "System Name : " << u.get_kernel_name() << "\n";
 	std::cout << "Node Name : " << u.get_nodename() << "\n";
 	std::cout << "Node Name : " << u.get_kernel_release() << "\n";
 	std::cout << "Node Name : " << u.get_kernel_version() << "\n";
-	std::cout << "Node Name : " << u.get_machine() << "\n";
+	std::cout << "Node Name : " << u.get_machine() << "\n";*/
 
 	coreutils::Apishell ash;
-	std::list<std::string> dirs;
+	
+	/*std::list<std::string> dirs;
 	ash.ls("/home/azael",dirs);
-
+	for(std::string d : dirs)
+	{
+		std::cout << "Diretory Name : " << d << "\n";
+	}*/
+	ash.mkdir("dir.arm");
    return EXIT_SUCCESS;
 }

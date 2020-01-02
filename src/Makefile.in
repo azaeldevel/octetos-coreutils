@@ -139,7 +139,9 @@ am__DEPENDENCIES_1 =
 liboctetos_coreutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am_liboctetos_coreutils_la_OBJECTS = liboctetos_coreutils_la-uname.lo \
-	liboctetos_coreutils_la-Apishell.lo
+	liboctetos_coreutils_la-Apishell.lo \
+	liboctetos_coreutils_la-cd.lo liboctetos_coreutils_la-ls.lo \
+	liboctetos_coreutils_la-mkdir.lo
 liboctetos_coreutils_la_OBJECTS =  \
 	$(am_liboctetos_coreutils_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -391,7 +393,10 @@ AM_CFLAGS = \
 lib_LTLIBRARIES = liboctetos-coreutils.la
 liboctetos_coreutils_la_SOURCES = \
 	uname.cc \
-	Apishell.cc
+	Apishell.cc \
+	cd.cc \
+	ls.cc \
+	mkdir.cc	
 
 liboctetos_coreutils_la_LDFLAGS = $(am__append_1) $(am__append_2)
 liboctetos_coreutils_la_CPPFLAGS = $(OCTETOS_CORE_CFLAGS)
@@ -541,6 +546,9 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/develop.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-Apishell.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-uname.Plo@am__quote@
 
 .cc.o:
@@ -577,6 +585,27 @@ liboctetos_coreutils_la-Apishell.lo: Apishell.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Apishell.cc' object='liboctetos_coreutils_la-Apishell.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-Apishell.lo `test -f 'Apishell.cc' || echo '$(srcdir)/'`Apishell.cc
+
+liboctetos_coreutils_la-cd.lo: cd.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT liboctetos_coreutils_la-cd.lo -MD -MP -MF $(DEPDIR)/liboctetos_coreutils_la-cd.Tpo -c -o liboctetos_coreutils_la-cd.lo `test -f 'cd.cc' || echo '$(srcdir)/'`cd.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/liboctetos_coreutils_la-cd.Tpo $(DEPDIR)/liboctetos_coreutils_la-cd.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='cd.cc' object='liboctetos_coreutils_la-cd.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-cd.lo `test -f 'cd.cc' || echo '$(srcdir)/'`cd.cc
+
+liboctetos_coreutils_la-ls.lo: ls.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT liboctetos_coreutils_la-ls.lo -MD -MP -MF $(DEPDIR)/liboctetos_coreutils_la-ls.Tpo -c -o liboctetos_coreutils_la-ls.lo `test -f 'ls.cc' || echo '$(srcdir)/'`ls.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/liboctetos_coreutils_la-ls.Tpo $(DEPDIR)/liboctetos_coreutils_la-ls.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ls.cc' object='liboctetos_coreutils_la-ls.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-ls.lo `test -f 'ls.cc' || echo '$(srcdir)/'`ls.cc
+
+liboctetos_coreutils_la-mkdir.lo: mkdir.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT liboctetos_coreutils_la-mkdir.lo -MD -MP -MF $(DEPDIR)/liboctetos_coreutils_la-mkdir.Tpo -c -o liboctetos_coreutils_la-mkdir.lo `test -f 'mkdir.cc' || echo '$(srcdir)/'`mkdir.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/liboctetos_coreutils_la-mkdir.Tpo $(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='mkdir.cc' object='liboctetos_coreutils_la-mkdir.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-mkdir.lo `test -f 'mkdir.cc' || echo '$(srcdir)/'`mkdir.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo

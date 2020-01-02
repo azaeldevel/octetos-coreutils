@@ -20,7 +20,10 @@ bin_PROGRAMS = develop
 
 liboctetos_coreutils_la_SOURCES = \
 	uname.cc \
-	Apishell.cc
+	Apishell.cc \
+	cd.cc \
+	ls.cc \
+	mkdir.cc	
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(OCTETOS_COREUTILS_LIBS) $(OCTETOS_CORE_LIBS)
