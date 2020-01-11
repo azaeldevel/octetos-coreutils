@@ -50,7 +50,8 @@ namespace coreutils
 		bool cd(const std::string&);
 		bool mkdir(const std::string&);
 		bool mkdir(const std::string&, int mode);
-		bool rmdir(const std::string&);
+		bool rm(const std::string&);
+		bool rename(const std::string&,const std::string&);
 	};
 
 } 

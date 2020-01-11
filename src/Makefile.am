@@ -24,7 +24,8 @@ liboctetos_coreutils_la_SOURCES = \
 	cd.cc \
 	ls.cc \
 	mkdir.cc \
-	rmdir.cc
+	rm.cc\
+	rename.cc
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(OCTETOS_COREUTILS_LIBS) $(OCTETOS_CORE_LIBS)
