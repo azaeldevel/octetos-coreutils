@@ -1,3 +1,6 @@
+#include <sys/types.h>
+#include <dirent.h>
+
 #include "Apishell.hh"
 
 namespace coreutils

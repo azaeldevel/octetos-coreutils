@@ -1,11 +1,11 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
-libdir=@libdir@
+libdir=@prefix@/lib
 datarootdir=@datarootdir@
 datadir=@datadir@
-includedir=@includedir@/include
+includedir=@prefix@/include
 
-Name: liboctetos_coreutils
+Name: octetos-coreutils
 Description: API C++ con algunas capacidades de coreutils.
 Version: @VERSION@
 Requires: 

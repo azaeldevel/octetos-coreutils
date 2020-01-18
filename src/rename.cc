@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "Apishell.hh"
 
 namespace coreutils

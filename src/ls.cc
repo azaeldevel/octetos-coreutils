@@ -1,3 +1,4 @@
+#include <dirent.h>
 
 #include "Apishell.hh"
 

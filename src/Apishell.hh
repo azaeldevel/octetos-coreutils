@@ -1,16 +1,10 @@
 #ifndef APISHELL_HH
 #define APISHELL_HH
 
-#include <stdio.h>
-#include <dirent.h>
 #include <string>
 #include <list>
 #include <octetos/core/Error.hh>
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-
-//uname
+#include <dirent.h>
 #include <sys/utsname.h>
 
 
