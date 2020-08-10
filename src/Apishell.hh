@@ -41,12 +41,14 @@ namespace coreutils
 		Apishell(const std::string&);
 		~Apishell();
 		bool ls(const std::string&, std::list<std::string>&);
+		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
 		bool mkdir(const std::string&);
 		bool mkdir(const std::string&, int mode);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
 	};
+
 
 } 
 

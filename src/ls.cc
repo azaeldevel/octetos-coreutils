@@ -1,4 +1,5 @@
 #include <dirent.h>
+#include <sys/types.h>
 
 #include "Apishell.hh"
 
@@ -8,9 +9,21 @@ namespace coreutils
 	{
 		struct dirent *entry;
 
+		DIR* d = opendir(name.c_str());
+  		while((entry = readdir(d)))
+		{
+			l.push_back(entry->d_name);
+		}
+	
+		return true;
+	}
+	
+	bool Apishell::ls(std::list<std::string>& l)
+	{
+		struct dirent *entry;
+
   		while((entry = readdir(actualDir)))
 		{
-			//std::cout << "Directory name : " << entry->d_name << "\n";
 			l.push_back(entry->d_name);
 		}
 	

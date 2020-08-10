@@ -36,8 +36,15 @@ liboctetos_coreutils_la_SOURCES = \
 	rm.cc \
 	rename.cc
 
-develop_LDADD =  $(OCTETOS_CORE_LIBS) liboctetos-coreutils.la
-develop_SOURCES = develop.cc 
+develop_LDADD =  $(OCTETOS_CORE_LIBS)
+develop_SOURCES = develop.cc \
+	Apishell.cc \
+	uname.cc \
+	cd.cc \
+	ls.cc \
+	mkdir.cc \
+	rm.cc \
+	rename.cc
 
 octetos_core_includedir = $(includedir)/octetos/coreutils
 octetos_core_include_HEADERS = Apishell.hh

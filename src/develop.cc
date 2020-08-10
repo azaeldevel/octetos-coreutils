@@ -37,5 +37,13 @@ int main(void) {
 		std::cout << "No se elimino '" << dir << "\n";
 	}
 	
+	std::list<std::string> dirs;
+	ash.ls(dirs);
+	for(std::string d: dirs)
+	{
+		std::cout << "D :" <<  d << "\n";
+	}
+
+	
    	return EXIT_SUCCESS;
 }
