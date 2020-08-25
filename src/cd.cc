@@ -7,11 +7,19 @@ namespace coreutils
 {
 
 	bool Apishell::cd(const std::string& dir)
-	{			
-		actualDir = opendir(dir.c_str());
-		std::string msg = "El parámetro '";
-		msg += dir + "' causo error.";
-		if (actualDir) return true;
-		return false;
+	{
+		if(actualDir)
+		{
+			closedir(actualDir);
+			actualDir = opendir(dir.c_str());
+			if(actualDir) return true;
+			else return false;
+		}
+		else
+		{
+			actualDir = opendir(dir.c_str());
+			if(actualDir) return true;
+			else return false;
+		}
 	}
 }

@@ -12,7 +12,7 @@ namespace coreutils
 	Apishell::Apishell()
 	{
 		actualDir = NULL;
-		std::string default_dir = ".";
+		std::string default_dir = "/";
 		cd(default_dir);
 	}
 	Apishell::~Apishell()

@@ -8,7 +8,7 @@ namespace coreutils
 	{
 		int retRm = rename(oldname.c_str(),newname.c_str());
 		if(retRm == 0) return true;
-		if(retRm == -1) return false;
-		return false;
+		else if(retRm == -1) return false;
+		else return false;
 	}
 }
