@@ -38,16 +38,20 @@ int main(void) {
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
 	}
-	/*
+	
 	if(ash.rm(dir)) 
 	{
-		std::cout << "Se elimino '" << dir << "\n";
+		std::cout << "Se elimino " << dir << "\n";
 	}
 	else 
 	{
-		std::cout << "No se elimino '" << dir << "\n";
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
 	}
 	
+	/*
 	std::list<std::string> dirs;
 	ash.ls(dirs);
 	for(std::string d: dirs)
