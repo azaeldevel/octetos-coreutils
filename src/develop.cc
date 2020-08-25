@@ -18,16 +18,27 @@ int main(void) {
 	
 	coreutils::Apishell ash;
 	
+	if(!ash.cd("."))
+	{
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
+	}
+	
 	std::string dir = "dir.arm";
 	if(ash.mkdir(dir)) 
 	{
-		std::cout << "Se creo '" << dir << "\n";
+		std::cout << "Se creo " << dir << "\n";
 	}
 	else
 	{
-		std::cout << "No se creo '" << dir << "\n";
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
 	}
-	
+	/*
 	if(ash.rm(dir)) 
 	{
 		std::cout << "Se elimino '" << dir << "\n";
@@ -42,7 +53,7 @@ int main(void) {
 	for(std::string d: dirs)
 	{
 		std::cout << "D :" <<  d << "\n";
-	}
+	}*/
 
 	
    	return EXIT_SUCCESS;

@@ -27,11 +27,11 @@ namespace coreutils
 		bool ls(const std::string&, std::list<std::string>&);
 		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
-		bool mkdir(const std::string&);
-		bool mkdir(const std::string&, int mode);
+		bool mkdir(const std::string&, int mode = 0);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
-		bool touch(const std::string&);
+		bool touch(const std::string&, int m = 0);
+		bool ln(const std::string&, int m = 0);
 	};
 
 
