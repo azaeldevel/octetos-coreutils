@@ -1,4 +1,10 @@
-v0.1.0-alpha
+2020-08-25 Azael Reyes <azael.devel@gmail.com>
+0.5.0-alpha
+	- Refactory de Apishell, cd, ls, mkdir.
+	- 
+
+2020-08-25 Azael Reyes <azael.devel@gmail.com>
+0.1.0-alpha
 	- Implemetacion para uname
 	- Implemetacion para ls
 	- Implemetacion para cd

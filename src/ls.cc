@@ -5,7 +5,7 @@
 
 namespace coreutils
 {
-	bool Apishell::ls(const std::string& name, std::list<std::string>& l)
+	/*bool Apishell::ls(const std::string& name, std::list<std::string>& l)
 	{
 		struct dirent *entry;
 		
@@ -16,8 +16,7 @@ namespace coreutils
 		}
 	
 		return true;
-	}
-	
+	}*/	
 	bool Apishell::ls(std::list<std::string>& l)
 	{
 		struct dirent *entry;
