@@ -73,9 +73,7 @@ namespace coreutils
 #endif
 			return false;
 		}
-
-		
-
+				
 		return true;
 	}
 	Apishell::Apishell(const std::string& default_dir)

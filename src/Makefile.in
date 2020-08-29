@@ -142,7 +142,8 @@ liboctetos_coreutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__objects_1 = liboctetos_coreutils_la-Apishell.lo \
 	liboctetos_coreutils_la-ls.lo liboctetos_coreutils_la-cd.lo \
-	liboctetos_coreutils_la-mkdir.lo liboctetos_coreutils_la-rm.lo
+	liboctetos_coreutils_la-mkdir.lo liboctetos_coreutils_la-rm.lo \
+	liboctetos_coreutils_la-touch.lo
 am_liboctetos_coreutils_la_OBJECTS = $(am__objects_1)
 liboctetos_coreutils_la_OBJECTS =  \
 	$(am_liboctetos_coreutils_la_OBJECTS)
@@ -155,7 +156,7 @@ liboctetos_coreutils_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(liboctetos_coreutils_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
 am__objects_2 = Apishell.$(OBJEXT) ls.$(OBJEXT) cd.$(OBJEXT) \
-	mkdir.$(OBJEXT) rm.$(OBJEXT)
+	mkdir.$(OBJEXT) rm.$(OBJEXT) touch.$(OBJEXT)
 am_develop_OBJECTS = develop.$(OBJEXT) $(am__objects_2)
 develop_OBJECTS = $(am_develop_OBJECTS)
 develop_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -180,8 +181,10 @@ am__depfiles_remade = ./$(DEPDIR)/Apishell.Po ./$(DEPDIR)/cd.Po \
 	./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo \
 	./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo \
 	./$(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo \
-	./$(DEPDIR)/liboctetos_coreutils_la-rm.Plo ./$(DEPDIR)/ls.Po \
-	./$(DEPDIR)/mkdir.Po ./$(DEPDIR)/rm.Po
+	./$(DEPDIR)/liboctetos_coreutils_la-rm.Plo \
+	./$(DEPDIR)/liboctetos_coreutils_la-touch.Plo \
+	./$(DEPDIR)/ls.Po ./$(DEPDIR)/mkdir.Po ./$(DEPDIR)/rm.Po \
+	./$(DEPDIR)/touch.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -400,7 +403,7 @@ AM_CFLAGS = \
 	 -g
 
 lib_LTLIBRARIES = liboctetos-coreutils.la
-SOURCES = Apishell.cc ls.cc cd.cc mkdir.cc rm.cc
+SOURCES = Apishell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc
 liboctetos_coreutils_la_LDFLAGS = $(am__append_1) $(am__append_2)
 liboctetos_coreutils_la_CPPFLAGS = $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(CUNIT_LIBS)  $(OCTETOS_CORE_LIBS) -ldl 
@@ -555,9 +558,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-rm.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-touch.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ls.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mkdir.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rm.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/touch.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -620,6 +625,13 @@ liboctetos_coreutils_la-rm.lo: rm.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='rm.cc' object='liboctetos_coreutils_la-rm.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-rm.lo `test -f 'rm.cc' || echo '$(srcdir)/'`rm.cc
+
+liboctetos_coreutils_la-touch.lo: touch.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT liboctetos_coreutils_la-touch.lo -MD -MP -MF $(DEPDIR)/liboctetos_coreutils_la-touch.Tpo -c -o liboctetos_coreutils_la-touch.lo `test -f 'touch.cc' || echo '$(srcdir)/'`touch.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/liboctetos_coreutils_la-touch.Tpo $(DEPDIR)/liboctetos_coreutils_la-touch.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='touch.cc' object='liboctetos_coreutils_la-touch.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-touch.lo `test -f 'touch.cc' || echo '$(srcdir)/'`touch.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -807,9 +819,11 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-rm.Plo
+	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-touch.Plo
 	-rm -f ./$(DEPDIR)/ls.Po
 	-rm -f ./$(DEPDIR)/mkdir.Po
 	-rm -f ./$(DEPDIR)/rm.Po
+	-rm -f ./$(DEPDIR)/touch.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -864,9 +878,11 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-mkdir.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-rm.Plo
+	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-touch.Plo
 	-rm -f ./$(DEPDIR)/ls.Po
 	-rm -f ./$(DEPDIR)/mkdir.Po
 	-rm -f ./$(DEPDIR)/rm.Po
+	-rm -f ./$(DEPDIR)/touch.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

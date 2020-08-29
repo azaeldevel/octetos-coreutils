@@ -17,17 +17,6 @@ int main(void) {
 	std::cout << "Node Name : " << u.get_machine() << "\n";*/
 	
 	coreutils::Apishell ash;
-	
-	/*	
-	if(!ash.touch("test1.txt"))
-	{
-		if(octetos::core::Error::check())
-		{			
-			std::cout << octetos::core::Error::get().describe() << "\n";
-		}
-	}
-	
-	*/
 
 	
 	if(ash.cd("Debug")) 
@@ -67,6 +56,15 @@ int main(void) {
 		}
 		return EXIT_FAILURE;
 	}
+
 	
+	if(!ash.touch("test1.txt"))
+	{
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
+		return EXIT_FAILURE;
+	}
    	return EXIT_SUCCESS;
 }
