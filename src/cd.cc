@@ -8,18 +8,7 @@ namespace coreutils
 
 	bool Apishell::cd(const std::string& dir)
 	{
-		if(actualDir)
-		{
-			closedir(actualDir);
-		}
-
-		actualDir = opendir(dir.c_str());
-
-		if(actualDir) 
-		{
-			return true;
-		}
-		else 
+		if(fchdir(fdfdcwd) == -1)
 		{
 			std::string msg = "Fallo de cambio de directorio '";
 			msg += dir + "' \n\t";
@@ -48,9 +37,9 @@ namespace coreutils
 					break;
 			}
 #if DEBUG
-			core::Error::write(core::Error(msg,errno,__FILE__,__LINE__));
+			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
+			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
 #endif
 			return false;
 		}

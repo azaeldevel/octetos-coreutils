@@ -18,8 +18,14 @@ namespace coreutils
 	class Apishell
 	{
 	private:
-		DIR* actualDir;
-		std::string actualDirStr;
+		DIR* dircwd;
+		const char* strcwd;
+		/**
+		* \brief Inidca si strcdw fua asignada con malloc
+		*/
+		bool strcwd_malloc;
+		int fdcwd;
+		bool cwd(const std::string& = "");
 
 	public:
 		Apishell();
@@ -31,7 +37,7 @@ namespace coreutils
 		bool mkdir(const std::string&, int mode = 0);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
-		bool touch(const std::string&, int m = 0);
+		bool touch(const std::string&, int options = 0);
 		bool ln(const std::string&, int m = 0);
 	};
 

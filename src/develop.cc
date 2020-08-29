@@ -18,7 +18,7 @@ int main(void) {
 	
 	coreutils::Apishell ash;
 	
-	if(!ash.cd("."))
+	/*if(!ash.cd("."))
 	{
 		if(octetos::core::Error::check())
 		{			
@@ -38,6 +38,16 @@ int main(void) {
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
 	}
+	if(ash.cd(dir)) 
+	{
+	}
+	if(!ash.touch("test1.txt"))
+	{
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
+	}
 	
 	if(ash.rm(dir)) 
 	{
@@ -49,15 +59,16 @@ int main(void) {
 		{			
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
-	}
+	}*/
+
 	
-	/*
+	
 	std::list<std::string> dirs;
 	ash.ls(dirs);
 	for(std::string d: dirs)
 	{
 		std::cout << "D :" <<  d << "\n";
-	}*/
+	}
 
 	
    	return EXIT_SUCCESS;

@@ -1,3 +1,5 @@
 - Agregar login
 - Agregar exit
 - Agregar id 
+- Cambiar el Nombre de Apishell hacia shell, para hacer ma simple el nombre.
+- Cambiar a esquema basado en fd interno.

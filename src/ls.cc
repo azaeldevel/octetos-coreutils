@@ -21,7 +21,7 @@ namespace coreutils
 	{
 		struct dirent *entry;
 
-  		while((entry = readdir(actualDir)))
+  		while((entry = readdir(dircwd)))
 		{
 			l.push_back(entry->d_name);
 		}

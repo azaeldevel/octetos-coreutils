@@ -25,7 +25,7 @@ namespace coreutils
 			std::string msg = "Fallo al crear el archivo '";
 			msg += name + "'";
 #if DEBUG
-			core::Error::write(core::Error(msg,errno,__FILE__,__LINE__));
+			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
 			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
@@ -70,7 +70,7 @@ namespace coreutils
 					break;
 			}
 #if DEBUG
-			core::Error::write(core::Error(msg,errno,__FILE__,__LINE__));
+			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
 			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
