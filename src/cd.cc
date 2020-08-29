@@ -1,12 +1,12 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
 
-	bool Apishell::cd(const std::string& dir)
+	bool Shell::cd(const std::string& dir)
 	{		
 		if(!cwd(dir))
 		{

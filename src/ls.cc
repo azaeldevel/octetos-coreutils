@@ -1,11 +1,11 @@
 #include <dirent.h>
 #include <sys/types.h>
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
-	bool Apishell::ls(std::list<std::string>& l)
+	bool Shell::ls(std::list<std::string>& l)
 	{
 		struct dirent *entry;
 

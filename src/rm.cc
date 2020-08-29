@@ -4,11 +4,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
-    bool Apishell::rm(const std::string& path)
+    bool Shell::rm(const std::string& path)
 	{
 		struct stat buf;
 		int fd = open(path.c_str(),O_RDONLY);

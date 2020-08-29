@@ -3,11 +3,11 @@
 #include <unistd.h>
 
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
-	bool Apishell::mkdir(const std::string& name, int mode)
+	bool Shell::mkdir(const std::string& name, int mode)
 	{
 		struct stat st = {0};
 		int retMkdir = -1;

@@ -1,6 +1,13 @@
+2020-08-27 Azael Reyes <azael.devel@gmail.com>
+0.6.0-alpa
+	- Cambiar el Nombre de Apishell hacia shell, para hacer mas simple el nombre
+
+2020-08-27 Azael Reyes <azael.devel@gmail.com>
+0.5.0-alpa
+	- Cambiar a esquema basado en fd interno
+
 2020-08-25 Azael Reyes <azael.devel@gmail.com>
 0.5.0-alpha
-	- Cambiar a esquema basado en fd interno.
 	- Refactory de Apishell, cd, ls, mkdir.
 
 2020-08-25 Azael Reyes <azael.devel@gmail.com>

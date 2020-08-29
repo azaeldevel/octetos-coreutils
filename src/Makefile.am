@@ -1,6 +1,3 @@
-## Process this file with automake to produce Makefile.in
-
-## Created by Anjuta
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
@@ -16,7 +13,7 @@ lib_LTLIBRARIES = liboctetos-coreutils.la
 
 bin_PROGRAMS = develop
 
-SOURCES = Apishell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc
+SOURCES = shell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc rename.cc
 
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
@@ -34,7 +31,7 @@ develop_LDADD =  $(OCTETOS_CORE_LIBS)
 develop_SOURCES = develop.cc $(SOURCES)
 
 octetos_core_includedir = $(includedir)/octetos/coreutils
-octetos_core_include_HEADERS = Apishell.hh
+octetos_core_include_HEADERS = shell.hh
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = octetos-coreutils.pc

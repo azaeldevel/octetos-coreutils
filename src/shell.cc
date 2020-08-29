@@ -3,11 +3,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
-	bool Apishell::cwd(const std::string& path)
+	bool Shell::cwd(const std::string& path)
 	{
 		if(path.empty()) 
 		{
@@ -76,24 +76,20 @@ namespace coreutils
 				
 		return true;
 	}
-	Apishell::Apishell(const std::string& default_dir)
+	Shell::Shell(const std::string& default_dir)
 	{
 		strcwd = NULL;
-		
+		cwd();	
 	}
-	Apishell::Apishell()
+	Shell::Shell()
 	{
 		strcwd = NULL;
 		cwd();
 	}
-	Apishell::~Apishell()
+	Shell::~Shell()
 	{
 		
 	}
-
-
-
-
 
 	Error::Error(const std::string& msg) throw() : octetos::core::Error(msg)
 	{}

@@ -2,12 +2,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "Apishell.hh"
+#include "shell.hh"
 
 namespace coreutils
 {
 
-	bool Apishell::touch(const std::string& name, int options)
+	bool Shell::touch(const std::string& name, int options)
 	{
 		if(options == 0)
 		{

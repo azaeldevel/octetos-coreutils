@@ -19,3 +19,5 @@ missing
 octetos-coreutils.anjuta
 src/*~
 *~
+Makefile.in
+src/Makefile.in

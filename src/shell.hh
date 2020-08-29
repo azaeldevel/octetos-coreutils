@@ -15,7 +15,7 @@ namespace coreutils
 		Error(const std::string&) throw();
 	};	
 
-	class Apishell
+	class Shell
 	{
 	private:
 		DIR* dircwd;
@@ -28,9 +28,9 @@ namespace coreutils
 		bool cwd(const std::string& = "");
 
 	public:
-		Apishell();
-		Apishell(const std::string&);
-		~Apishell();
+		Shell();
+		Shell(const std::string&);
+		~Shell();
 		//bool ls(const std::string&, std::list<std::string>&);
 		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
