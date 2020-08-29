@@ -38,9 +38,6 @@ int main(void) {
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
 	}
-	if(ash.cd(dir)) 
-	{
-	}
 	if(!ash.touch("test1.txt"))
 	{
 		if(octetos::core::Error::check())
@@ -62,6 +59,10 @@ int main(void) {
 	}*/
 
 	
+	if(ash.cd("Debug")) 
+	{
+		
+	}
 	
 	std::list<std::string> dirs;
 	ash.ls(dirs);
@@ -69,7 +70,6 @@ int main(void) {
 	{
 		std::cout << "D :" <<  d << "\n";
 	}
-
 	
    	return EXIT_SUCCESS;
 }

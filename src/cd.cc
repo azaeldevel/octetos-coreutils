@@ -7,8 +7,8 @@ namespace coreutils
 {
 
 	bool Apishell::cd(const std::string& dir)
-	{
-		if(fchdir(fdfdcwd) == -1)
+	{		
+		if(!cwd(dir))
 		{
 			std::string msg = "Fallo de cambio de directorio '";
 			msg += dir + "' \n\t";

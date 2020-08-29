@@ -141,7 +141,7 @@ am__DEPENDENCIES_1 =
 liboctetos_coreutils_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__objects_1 = liboctetos_coreutils_la-Apishell.lo \
-	liboctetos_coreutils_la-ls.lo
+	liboctetos_coreutils_la-ls.lo liboctetos_coreutils_la-cd.lo
 am_liboctetos_coreutils_la_OBJECTS = $(am__objects_1)
 liboctetos_coreutils_la_OBJECTS =  \
 	$(am_liboctetos_coreutils_la_OBJECTS)
@@ -153,7 +153,7 @@ liboctetos_coreutils_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(liboctetos_coreutils_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
-am__objects_2 = Apishell.$(OBJEXT) ls.$(OBJEXT)
+am__objects_2 = Apishell.$(OBJEXT) ls.$(OBJEXT) cd.$(OBJEXT)
 am_develop_OBJECTS = develop.$(OBJEXT) $(am__objects_2)
 develop_OBJECTS = $(am_develop_OBJECTS)
 develop_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -172,8 +172,10 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/Apishell.Po ./$(DEPDIR)/develop.Po \
+am__depfiles_remade = ./$(DEPDIR)/Apishell.Po ./$(DEPDIR)/cd.Po \
+	./$(DEPDIR)/develop.Po \
 	./$(DEPDIR)/liboctetos_coreutils_la-Apishell.Plo \
+	./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo \
 	./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo ./$(DEPDIR)/ls.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -393,7 +395,7 @@ AM_CFLAGS = \
 	 -g
 
 lib_LTLIBRARIES = liboctetos-coreutils.la
-SOURCES = Apishell.cc ls.cc
+SOURCES = Apishell.cc ls.cc cd.cc
 liboctetos_coreutils_la_LDFLAGS = $(am__append_1) $(am__append_2)
 liboctetos_coreutils_la_CPPFLAGS = $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(CUNIT_LIBS)  $(OCTETOS_CORE_LIBS) -ldl 
@@ -541,8 +543,10 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Apishell.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cd.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/develop.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-Apishell.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ls.Po@am__quote@ # am--include-marker
 
@@ -586,6 +590,13 @@ liboctetos_coreutils_la-ls.lo: ls.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ls.cc' object='liboctetos_coreutils_la-ls.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-ls.lo `test -f 'ls.cc' || echo '$(srcdir)/'`ls.cc
+
+liboctetos_coreutils_la-cd.lo: cd.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT liboctetos_coreutils_la-cd.lo -MD -MP -MF $(DEPDIR)/liboctetos_coreutils_la-cd.Tpo -c -o liboctetos_coreutils_la-cd.lo `test -f 'cd.cc' || echo '$(srcdir)/'`cd.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/liboctetos_coreutils_la-cd.Tpo $(DEPDIR)/liboctetos_coreutils_la-cd.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='cd.cc' object='liboctetos_coreutils_la-cd.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(liboctetos_coreutils_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o liboctetos_coreutils_la-cd.lo `test -f 'cd.cc' || echo '$(srcdir)/'`cd.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -766,8 +777,10 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/Apishell.Po
+	-rm -f ./$(DEPDIR)/cd.Po
 	-rm -f ./$(DEPDIR)/develop.Po
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-Apishell.Plo
+	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo
 	-rm -f ./$(DEPDIR)/ls.Po
 	-rm -f Makefile
@@ -817,8 +830,10 @@ installcheck-am:
 
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/Apishell.Po
+	-rm -f ./$(DEPDIR)/cd.Po
 	-rm -f ./$(DEPDIR)/develop.Po
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-Apishell.Plo
+	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-cd.Plo
 	-rm -f ./$(DEPDIR)/liboctetos_coreutils_la-ls.Plo
 	-rm -f ./$(DEPDIR)/ls.Po
 	-rm -f Makefile
