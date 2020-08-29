@@ -19,11 +19,11 @@ namespace coreutils
 			strcwd_malloc = true;
 			if(strcwd == NULL)
 			{
-#if DEBUG
 				std::string msg = "Falló al leer el directorio de trabajo actual.";
+#if DEBUG
 				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-				octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+				octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 				return false;
 			}
@@ -39,11 +39,11 @@ namespace coreutils
 		fdcwd = open(strcwd,O_RDONLY,S_IRUSR | S_IWUSR | S_IXUSR);
 		if(fdcwd == -1)
 		{
-#if DEBUG
 			std::string msg = "Falló al abrir el directorio de trabajo actual.";
+#if DEBUG
 			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 			return false;
 		}
@@ -51,11 +51,11 @@ namespace coreutils
 		//cambiando en directorio
 		if(fchdir(fdcwd) == -1)
 		{
-#if DEBUG
 			std::string msg = "Falló al cambiar el directorio de trabajo actual.";
+#if DEBUG
 			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 			return false;
 		}
@@ -65,11 +65,11 @@ namespace coreutils
 		dircwd = fdopendir(fdcwd);
 		if(dircwd == NULL)
 		{
-#if DEBUG
 			std::string msg = "Falló al abrir el directorio de trabajo actual.";
+#if DEBUG
 			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 			return false;
 		}

@@ -11,7 +11,9 @@ namespace coreutils
 		if(!cwd(dir))
 		{
 			std::string msg = "Fallo de cambio de directorio '";
-			msg += dir + "' \n\t";
+			msg += dir + "'";			
+#if DEBUG
+			msg += "\n\t";
 			switch(errno)
 			{
 				case EACCES:
@@ -36,10 +38,9 @@ namespace coreutils
 					msg += "name is not a directory";
 					break;
 			}
-#if DEBUG
 			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
-			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+			octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 			return false;
 		}
