@@ -1,9 +1,13 @@
 2020-08-27 Azael Reyes <azael.devel@gmail.com>
-0.6.0-alpa
+0.6.1-alpha
+	- Correcion de codificacion en funcion Shell::cd, faltaba return true.
+
+2020-08-27 Azael Reyes <azael.devel@gmail.com>
+0.6.0-alpha
 	- Cambiar el Nombre de Apishell hacia shell, para hacer mas simple el nombre
 
 2020-08-27 Azael Reyes <azael.devel@gmail.com>
-0.5.0-alpa
+0.5.0-alpha
 	- Cambiar a esquema basado en fd interno
 
 2020-08-25 Azael Reyes <azael.devel@gmail.com>

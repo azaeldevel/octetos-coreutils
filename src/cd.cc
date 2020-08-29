@@ -44,5 +44,10 @@ namespace coreutils
 #endif
 			return false;
 		}
+		
+	return true;
 	}
+
+
+	
 }

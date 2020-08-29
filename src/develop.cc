@@ -18,7 +18,7 @@ int main(void) {
 	
 	coreutils::Shell ash;
 
-	
+	/*
 	if(ash.cd("Debug")) 
 	{
 		
@@ -55,9 +55,7 @@ int main(void) {
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
 		return EXIT_FAILURE;
-	}
-
-	
+	}	
 	if(!ash.touch("test1.txt"))
 	{
 		if(octetos::core::Error::check())
@@ -65,6 +63,20 @@ int main(void) {
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
 		return EXIT_FAILURE;
+	}
+	*/
+
+	
+	if(ash.cd("/var/db/pkg/")) 
+	{
+		
+	}
+
+	std::list<std::string> dirs;
+	ash.ls(dirs);
+	for(std::string d: dirs)
+	{
+		std::cout << "D :" <<  d << "\n";
 	}
    	return EXIT_SUCCESS;
 }
