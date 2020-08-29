@@ -14,11 +14,11 @@ namespace coreutils
 		
 		if(mode == 0)
 		{
-			retMkdir = ::mkdir(name.c_str(),0700);
+			retMkdir = ::mkdirat(fdcwd,name.c_str(),0644);
 		}
 		else if (stat(name.c_str(), &st) == -1) 
 		{
-			retMkdir = ::mkdir(name.c_str(), mode);
+			retMkdir = ::mkdirat(fdcwd,name.c_str(), mode);
 		}
 		else
 		{

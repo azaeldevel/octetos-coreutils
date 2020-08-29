@@ -26,18 +26,6 @@ int main(void) {
 		}
 	}
 	
-	std::string dir = "dir.arm";
-	if(ash.mkdir(dir)) 
-	{
-		std::cout << "Se creo " << dir << "\n";
-	}
-	else
-	{
-		if(octetos::core::Error::check())
-		{			
-			std::cout << octetos::core::Error::get().describe() << "\n";
-		}
-	}
 	if(!ash.touch("test1.txt"))
 	{
 		if(octetos::core::Error::check())
@@ -69,6 +57,19 @@ int main(void) {
 	for(std::string d: dirs)
 	{
 		std::cout << "D :" <<  d << "\n";
+	}
+
+	std::string dir = "dir.arm";
+	if(ash.mkdir(dir)) 
+	{
+		std::cout << "Se creo " << dir << "\n";
+	}
+	else
+	{
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
 	}
 	
    	return EXIT_SUCCESS;
