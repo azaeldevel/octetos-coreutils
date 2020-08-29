@@ -48,6 +48,19 @@ namespace coreutils
 			return false;
 		}
 
+		//cambiando en directorio
+		if(fchdir(fdcwd) == -1)
+		{
+#if DEBUG
+			std::string msg = "Falló al cambiar el directorio de trabajo actual.";
+			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
+#else
+			octetos::octetos::core::Error::write(octetos::octetos::core::Error(msg,errno));
+#endif
+			return false;
+		}
+
+		
 		//inicando estructura de directorio DIR
 		dircwd = fdopendir(fdcwd);
 		if(dircwd == NULL)
@@ -60,6 +73,8 @@ namespace coreutils
 #endif
 			return false;
 		}
+
+		
 
 		return true;
 	}

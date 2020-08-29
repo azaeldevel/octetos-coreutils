@@ -18,14 +18,7 @@ int main(void) {
 	
 	coreutils::Apishell ash;
 	
-	/*if(!ash.cd("."))
-	{
-		if(octetos::core::Error::check())
-		{			
-			std::cout << octetos::core::Error::get().describe() << "\n";
-		}
-	}
-	
+	/*	
 	if(!ash.touch("test1.txt"))
 	{
 		if(octetos::core::Error::check())
@@ -34,17 +27,7 @@ int main(void) {
 		}
 	}
 	
-	if(ash.rm(dir)) 
-	{
-		std::cout << "Se elimino " << dir << "\n";
-	}
-	else 
-	{
-		if(octetos::core::Error::check())
-		{			
-			std::cout << octetos::core::Error::get().describe() << "\n";
-		}
-	}*/
+	*/
 
 	
 	if(ash.cd("Debug")) 
@@ -70,6 +53,19 @@ int main(void) {
 		{			
 			std::cout << octetos::core::Error::get().describe() << "\n";
 		}
+		return EXIT_FAILURE;
+	}
+	if(ash.rm(dir)) 
+	{
+		std::cout << "Se elimino " << dir << "\n";
+	}
+	else 
+	{
+		if(octetos::core::Error::check())
+		{			
+			std::cout << octetos::core::Error::get().describe() << "\n";
+		}
+		return EXIT_FAILURE;
 	}
 	
    	return EXIT_SUCCESS;

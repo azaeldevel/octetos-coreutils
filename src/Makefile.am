@@ -16,7 +16,7 @@ lib_LTLIBRARIES = liboctetos-coreutils.la
 
 bin_PROGRAMS = develop
 
-SOURCES = Apishell.cc ls.cc cd.cc mkdir.cc
+SOURCES = Apishell.cc ls.cc cd.cc mkdir.cc rm.cc
 
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)

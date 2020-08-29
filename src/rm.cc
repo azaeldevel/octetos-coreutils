@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "Apishell.hh"
 
@@ -10,11 +11,20 @@ namespace coreutils
     bool Apishell::rm(const std::string& path)
 	{
 		struct stat buf;
-		lstat (path.c_str(), &buf);
+		int fd = open(path.c_str(),O_RDONLY);
+		if(fd == -1)
+		{
+			return false;
+		}		
+		if(fstat (fd, &buf) == -1)
+		{
+			return false;
+		}
+		//close(fd);
 
-		if (S_ISREG(buf.st_mode))//es link?
+		if (S_ISLNK(buf.st_mode) or S_ISREG(buf.st_mode))//es link?
 		{//es un link
-			int retRm = unlink(path.c_str());
+			int retRm = unlinkat(fdcwd,path.c_str(),0);
 			if(retRm == 0) 
 			{
 				return true;
@@ -22,7 +32,10 @@ namespace coreutils
 			else if(retRm == -1) 
 			{
 				std::string msg = "Fallo eliminar link '";
-				msg += path + "' \n\t";
+				msg += path + "'";
+				
+#if DEBUG
+				msg += "\n\t";
 				switch(errno)
 				{
 					case EACCES:
@@ -62,7 +75,6 @@ namespace coreutils
 						msg += "pathname refers to a file on a read-only file system";
 						break;
 				}
-#if DEBUG
 				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
 				octetos::core::Error::write(octetos::core::Error(msg,errno));
@@ -70,7 +82,7 @@ namespace coreutils
 				return false;
 			}
 		}
-		else //entonces es archivo
+		else if (S_ISDIR(buf.st_mode))//es un directorio?
 		{
 			int retRm = rmdir(path.c_str());
 			if(retRm == 0) 
@@ -80,7 +92,9 @@ namespace coreutils
 			else if(retRm == -1) 
 			{
 				std::string msg = "Fallo eliminar directorio '";
-				msg += path + "' \n\t";
+				msg += path + "'";
+#if DEBUG
+				msg += "\n\t";
 				switch(errno)
 				{
 					case EACCES:
@@ -120,7 +134,6 @@ namespace coreutils
 						msg += "pathname refers to a directory on a read-only file system";
 						break;
 				}
-#if DEBUG
 				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
 #else
 				octetos::core::Error::write(octetos::core::Error(msg,errno));
@@ -128,7 +141,15 @@ namespace coreutils
 				return false;
 			}
 		}
-		
+
+		std::string msg = "Tipó de archivo desconocido '";
+		msg += path + "'";
+#if DEBUG
+		octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
+#else
+		octetos::core::Error::write(octetos::core::Error(msg,errno));
+#endif
+		return false;
 		
 	}
 }
