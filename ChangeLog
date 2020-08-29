@@ -1,20 +1,16 @@
 2020-08-27 Azael Reyes <azael.devel@gmail.com>
+0.7.0-alpha
+	- Se agrega getPackageInfo
 0.6.1-alpha
 	- Correcion de codificacion en funcion Shell::cd, faltaba return true.
-
-2020-08-27 Azael Reyes <azael.devel@gmail.com>
 0.6.0-alpha
 	- Cambiar el Nombre de Apishell hacia shell, para hacer mas simple el nombre
-
-2020-08-27 Azael Reyes <azael.devel@gmail.com>
 0.5.0-alpha
 	- Cambiar a esquema basado en fd interno
 
 2020-08-25 Azael Reyes <azael.devel@gmail.com>
 0.5.0-alpha
 	- Refactory de Apishell, cd, ls, mkdir.
-
-2020-08-25 Azael Reyes <azael.devel@gmail.com>
 0.1.0-alpha
 	- Implemetacion para uname
 	- Implemetacion para ls

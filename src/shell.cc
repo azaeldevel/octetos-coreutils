@@ -3,10 +3,29 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include "config.h"
 #include "shell.hh"
 
 namespace coreutils
 {
+	bool getPackageInfo(octetos::core::Artifact& packinfo)
+	{
+		packinfo.name = PACKAGE;
+		packinfo.brief = "Similar to coreutils but is a C++ API.";
+		packinfo.url = "https://github.com/azaeldevel/octetos-coreutils.git";
+		packinfo.name_decorated = "Libreria coreutils de Octetos";
+		
+		packinfo.version.set(VERSION);
+		
+		packinfo.licence.type = octetos::core::Licence::Type::GPLv3;		
+		packinfo.licence.name_public = PACKAGE;
+		packinfo.licence.owner = "Azael Reyes";
+		packinfo.licence.year = 2019;
+        packinfo.licence.contact = "azael.devel@gmail.com";
+		
+		return true;	
+	}
+	
 	bool Shell::cwd(const std::string& path)
 	{
 		if(path.empty()) 

@@ -4,11 +4,19 @@
 #include <string>
 #include <list>
 #include <octetos/core/Error.hh>
+#include <octetos/core/Artifact.hh>
 #include <dirent.h>
 
 
 namespace coreutils
 {
+	
+	/**
+	 * \brief retorna la informacion del paquete
+	 **/
+	bool getPackageInfo(octetos::core::Artifact&);
+
+
 	class Error : public octetos::core::Error
 	{
 	public:

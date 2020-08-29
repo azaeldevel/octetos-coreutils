@@ -6,7 +6,7 @@ datadir=@datadir@
 includedir=@prefix@/include
 
 Name: octetos-coreutils
-Description: Similar to coreutils but is a C ++ API.
+Description: Similar to coreutils but is a C++ API.
 Version: @VERSION@
 Requires: 
 Libs: -L${libdir} -loctetos-coreutils
