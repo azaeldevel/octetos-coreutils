@@ -1,6 +1,7 @@
 2020-08-27 Azael Reyes <azael.devel@gmail.com>
 0.7.0-alpha
 	- Se agrega getPackageInfo
+	- Se agregan pruebas
 0.6.1-alpha
 	- Correcion de codificacion en funcion Shell::cd, faltaba return true.
 0.6.0-alpha

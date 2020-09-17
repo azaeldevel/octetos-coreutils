@@ -11,7 +11,7 @@ AM_CFLAGS =\
 
 lib_LTLIBRARIES = liboctetos-coreutils.la
 
-bin_PROGRAMS = develop
+#noinst_PROGRAMS = develop
 
 SOURCES = shell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc rename.cc
 
@@ -25,7 +25,7 @@ if NATIVE_WIN32
 liboctetos_coreutils_la_LDFLAGS += -export-dynamic
 endif
 liboctetos_coreutils_la_SOURCES = $(SOURCES)
-	
+
 
 develop_LDADD =  $(OCTETOS_CORE_LIBS)
 develop_SOURCES = develop.cc $(SOURCES)
