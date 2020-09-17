@@ -27,9 +27,6 @@ endif
 liboctetos_coreutils_la_SOURCES = $(SOURCES)
 
 
-develop_LDADD =  $(OCTETOS_CORE_LIBS)
-develop_SOURCES = develop.cc $(SOURCES)
-
 octetos_core_includedir = $(includedir)/octetos/coreutils
 octetos_core_include_HEADERS = shell.hh
 
