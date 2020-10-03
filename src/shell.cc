@@ -144,6 +144,7 @@ namespace coreutils
 	Shell::Shell(const std::string& default_dir)
 	{
 		strcwd = NULL;
+		cd(default_dir);
 	}
 	Shell::Shell()
 	{
@@ -153,8 +154,9 @@ namespace coreutils
 	{
 		
 	}
-
 	Error::Error(const std::string& msg) throw() : octetos::core::Error(msg)
-	{}
+	{
+		
+	}
 
 }

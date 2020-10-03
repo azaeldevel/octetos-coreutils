@@ -53,7 +53,7 @@ namespace coreutils
 	class Shell
 	{
 	private:
-		DIR* dircwd;
+		
 		const char* strcwd;
 		/**
 		* \brief Inidca si strcdw fua asignada con malloc

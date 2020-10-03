@@ -4,7 +4,7 @@
 
 
 int main(void)
-{	
+{
 	coreutils::Shell shell;
 	
 	std::cout << "In " << shell.gcwd() << "\n";
@@ -13,7 +13,13 @@ int main(void)
 	
 	std::cout << "In " << shell.gcwd() << "\n";
 	
-	shell.execute("ls");
+	shell.execute("echo >>>>>>>>>>>>>>>>");
+	std::list<std::string> d;
+	shell.ls(d);
+	for(std::string s : d)
+	{
+		std::cout << s << "\n";
+	}	
 	
     return  EXIT_SUCCESS;
 }
