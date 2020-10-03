@@ -11,19 +11,12 @@ AM_CFLAGS =\
 
 lib_LTLIBRARIES = liboctetos-coreutils.la
 
-#noinst_PROGRAMS = develop
 
-SOURCES = shell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc rename.cc
+SOURCES = shell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc rename.cc exists.cc
 
 liboctetos_coreutils_la_LDFLAGS = 
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
-liboctetos_coreutils_la_LIBADD = $(CUNIT_LIBS)  $(OCTETOS_CORE_LIBS) -ldl 
-if PLATFORM_WIN32
-liboctetos_coreutils_la_LDFLAGS += -no-undefined
-endif
-if NATIVE_WIN32
-liboctetos_coreutils_la_LDFLAGS += -export-dynamic
-endif
+liboctetos_coreutils_la_LIBADD = $(OCTETOS_CORE_LIBS)
 liboctetos_coreutils_la_SOURCES = $(SOURCES)
 
 

@@ -1,7 +1,6 @@
-dnl Process this file with autoconf to produce a configure script.
-dnl Created by Anjuta application wizard.
 
-AC_INIT(octetos-coreutils, 0.8.2-alpha,azael.devel@gmail.com)
+
+AC_INIT(octetos-coreutils, 0.9.0-alpha,azael.devel@gmail.com)
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11])
 AM_SILENT_RULES([yes])
@@ -60,4 +59,5 @@ PKG_CHECK_MODULES(OCTETOS_CORE, [octetos-core])
 AC_OUTPUT([
 Makefile
 src/octetos-coreutils.pc
-src/Makefile])
+src/Makefile
+tests/Makefile])

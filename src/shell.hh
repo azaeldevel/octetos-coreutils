@@ -68,6 +68,8 @@ namespace coreutils
 		bool rename(const std::string&,const std::string&);
 		bool touch(const std::string&, int options = 0);
 		bool ln(const std::string&, int m = 0);
+		bool exists(const std::string&);
+		const char* gcwd();
 	};
 
 

@@ -29,6 +29,18 @@
 
 namespace coreutils
 {
+
+	const char* Shell::gcwd()
+	{
+		if(strcwd != NULL)
+		{
+			free((void*)strcwd);
+		}
+		strcwd = get_current_dir_name();
+		return strcwd;
+	}
+
+
 	bool getPackageInfo(octetos::core::Artifact& packinfo)
 	{
 		packinfo.name = PACKAGE;
@@ -47,6 +59,7 @@ namespace coreutils
 		return true;	
 	}
 	
+	/*
 	bool Shell::cwd(const std::string& path)
 	{
 		if(path.empty()) 
@@ -116,15 +129,14 @@ namespace coreutils
 				
 		return true;
 	}
+	*/
 	Shell::Shell(const std::string& default_dir)
 	{
 		strcwd = NULL;
-		cwd();	
 	}
 	Shell::Shell()
 	{
 		strcwd = NULL;
-		cwd();
 	}
 	Shell::~Shell()
 	{

@@ -19,21 +19,21 @@
  * 
  * */
 
-#include <unistd.h>
+
+#include <sys/stat.h>
 
 
 #include "shell.hh"
 
 namespace coreutils
 {
-
-	bool Shell::cd(const std::string& dir)
-	{		
-		int ret = chdir(dir.c_str());
-		if(ret == 0) return true;		
-		return false;
+	bool Shell::exists(const std::string& filename)
+	{
+	    struct stat buffer;
+		int exist = stat(filename.c_str(),&buffer);
+		if(exist == 0)
+		    return true;
+		else // -1
+		    return false;
 	}
-
-
-	
 }
