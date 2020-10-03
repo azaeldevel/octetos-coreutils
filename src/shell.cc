@@ -29,7 +29,18 @@
 
 namespace coreutils
 {
-
+	int execute(const std::string& cmd)
+	{
+		return system(cmd.c_str());
+	}
+	void Shell::set(std::vector<Enviroment*> v)
+	{
+		for(const Enviroment* env : v)
+		{
+			setenv(env->name.c_str(),env->value.c_str(),1);
+			//std::cout << env->name << "=" << env->value.c_str() << "\n";			
+		}
+	}
 	const char* Shell::gcwd()
 	{
 		if(strcwd != NULL)

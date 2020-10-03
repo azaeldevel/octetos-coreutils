@@ -13,6 +13,8 @@ int main(void)
 	
 	std::cout << "In " << shell.gcwd() << "\n";
 	
+	shell.execute("ls");
+	
     return  EXIT_SUCCESS;
 }
 

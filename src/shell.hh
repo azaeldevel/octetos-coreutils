@@ -27,6 +27,7 @@
 #include <octetos/core/Error.hh>
 #include <octetos/core/Artifact.hh>
 #include <dirent.h>
+#include <stdlib.h>
 
 
 namespace coreutils
@@ -37,6 +38,11 @@ namespace coreutils
 	 **/
 	bool getPackageInfo(octetos::core::Artifact&);
 
+	struct Enviroment
+	{
+		std::string name;
+		std::string value;
+	};
 
 	class Error : public octetos::core::Error
 	{
@@ -54,7 +60,7 @@ namespace coreutils
 		*/
 		bool strcwd_malloc;
 		int fdcwd;
-		bool cwd(const std::string& = "");
+		//bool cwd(const std::string& = "");
 
 	public:
 		Shell();
@@ -70,6 +76,8 @@ namespace coreutils
 		bool ln(const std::string&, int m = 0);
 		bool exists(const std::string&);
 		const char* gcwd();
+		void set(std::vector<Enviroment*>);
+		int execute(const std::string&);
 	};
 
 
