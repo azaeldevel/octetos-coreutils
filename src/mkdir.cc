@@ -54,8 +54,7 @@ namespace coreutils
 		   		else
 		   		{
 		   			newpath += s;
-		   		}
-		   		
+		   		}		   		
 		   		
 		   		std::cout << newpath << "\n";
 		   		stractual = newpath;
@@ -99,13 +98,18 @@ namespace coreutils
 		   	{   		
 		   		newpath += result[i] + "/";
 			   	//std::cout << "Step 4\n";
-			   	if(!exists(newpath)) 
+			   	trilean ret = exists(newpath);
+		   		if( ret == TNULL) 
 			   	{
 			   		std::string msg = "No existe el archivo ";
 			   		msg += newpath;
 					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
 					return TFALSE;
 			   	}
+		   		else if( ret == TFALSE) 
+		   		{
+		   			return TFALSE;
+		   		}
 		   	}
 		   	stractual = newpath;
 		   	int ret = ::mkdir(name.c_str(),0777);
