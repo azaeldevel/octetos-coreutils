@@ -46,11 +46,22 @@ namespace coreutils
 		   	std::string newpath ;
 		   	for(const std::string& s : result)
 		   	{
-		   		newpath += s;
-		   		//std::cout << newpath << "\n";
+		   		if(s.empty() or s.size() == 0) 
+		   		{
+		   			newpath += "/";
+		   			continue;
+		   		}
+		   		else
+		   		{
+		   			newpath += s;
+		   		}
+		   		
+		   		
+		   		std::cout << newpath << "\n";
 		   		stractual = newpath;
 		   		//std::cout << "\tcomponent :" << s << "\n"; 
-		   		if(exists(newpath) == TFALSE) 
+		   		trilean ret = exists(newpath);
+		   		if( ret == TNULL) 
 		   		{
 		   			if(::mkdir(newpath.c_str(),0777) == -1)
 		   			{
@@ -60,13 +71,11 @@ namespace coreutils
 						return TFALSE;
 		   			}
 		   		}
-		   		else
+		   		else if( ret == TFALSE) 
 		   		{
-		   			std::string msg = "File already exists : '";
-			   		msg += newpath + "'";
-					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-					return TFALSE;
+		   			return TFALSE;
 		   		}
+		   		
 		   		newpath += "/";
 		   	}
 		   	return TTRUE;

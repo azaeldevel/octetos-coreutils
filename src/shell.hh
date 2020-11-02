@@ -78,6 +78,10 @@ namespace coreutils
 		~Shell();
 		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
+		/**
+		*
+		*\return TTRUE if file exists, TNULL is not exists and TFALSE if error.
+		*/
 		trilean mkdir(const std::string&, int recursive=false);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);

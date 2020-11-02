@@ -22,8 +22,8 @@ void funciotns()
 	shell.echo("\n");
 	
 	
-	if(shell.mkdir("test12/test123/test1234/test12345",true) == TTRUE)
-	{	
+	if(shell.mkdir("/home/azael/test12/test123/test1234/test12345",true) == TTRUE)
+	{
 		CU_ASSERT(true);
 	}
 	else
@@ -32,8 +32,7 @@ void funciotns()
 		CU_ASSERT(false);
 		if(octetos::core::Error::check())
 		{
-			std::cerr << (std::string)octetos::core::Error::get() << "\n";
-			
+			std::cerr << (std::string)octetos::core::Error::get() << "\n";			
 		}	
 	}
 	
