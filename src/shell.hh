@@ -28,11 +28,20 @@
 #include <octetos/core/Artifact.hh>
 #include <dirent.h>
 #include <stdlib.h>
+#include <iostream>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define TTRUE 1
+#define TFALSE -1
+#define TNULL 0
 
 
 namespace coreutils
 {
 	
+	typedef signed char trilean;
+
 	/**
 	 * \brief retorna la informacion del paquete
 	 **/
@@ -54,30 +63,41 @@ namespace coreutils
 	{
 	private:
 		
-		const char* strcwd;
+		std::string strcwd;
+		int fdcwd;
 		/**
 		* \brief Inidca si strcdw fua asignada con malloc
 		*/
 		bool strcwd_malloc;
-		int fdcwd;
+		
 		//bool cwd(const std::string& = "");
-
+		
 	public:
 		Shell();
 		Shell(const std::string&);
 		~Shell();
-		//bool ls(const std::string&, std::list<std::string>&);
 		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
-		bool mkdir(const std::string&, int mode = 0);
+		trilean mkdir(const std::string&, int recursive=false);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
 		bool touch(const std::string&, int options = 0);
 		bool ln(const std::string&, int m = 0);
-		bool exists(const std::string&);
-		const char* gcwd();
+		/**
+		*
+		*\return TTRUE if file exists, TNULL is not exists and TFALSE if error.
+		*/
+		trilean exists(const std::string&);
+		const std::string& cwd();
 		void set(std::vector<Enviroment*>);
 		int execute(const std::string&);
+		int chmod(const std::string&,int mode);
+		void echo(const std::string&, std::ostream& out = std::cout);
+		uid_t uid() const;
+		gid_t gid() const;
+		bool chown(const std::string& fn,uid_t ,gid_t);
+		bool chown(const std::string& fn,uid_t);
+		bool chown(const std::string& fn);
 	};
 
 

@@ -27,13 +27,54 @@
 
 namespace coreutils
 {
-	bool Shell::exists(const std::string& filename)
+	trilean Shell::exists(const std::string& filename)
 	{
-	    struct stat buffer;
-		int exist = stat(filename.c_str(),&buffer);
-		if(exist == 0)
-		    return true;
-		else // -1
-		    return false;
+	   	struct stat info;
+	   	int ret = stat( filename.c_str(), &info );
+		if( ret == 0 )
+		{
+			if( (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT) || (info.st_mode && S_IFLNK))
+			{
+				return TTRUE;
+			}
+		}
+		else
+		{
+			std::string msg = "Fail on floor : '";
+			msg += filename + "'";
+			switch(errno)
+			{
+				case EACCES:
+					msg += "Search permission is denied for one of the directories in the path prefix of pathname.";
+					break;
+				case EBADF:
+					msg += "fd is not a valid open file descriptor.\nor\ndirfd is not a valid file descriptor.";
+					break;
+				case EFAULT:
+					msg += "Bad address.";
+					break;
+				case ELOOP:
+					msg += "Too many symbolic links encountered while traversing the path.";
+					break;
+				case ENAMETOOLONG:
+					msg += "pathname is too long.";
+					break;
+				case ENOENT:
+					msg += "A component of pathname does not exist or is a dangling symbolic link.\nor\npathname is an empty string and AT_EMPTY_PATH was not specified in flags.\nor\nOut of memory (i.e., kernel memory).";
+					break;
+				case ENOTDIR:
+					msg += "A component of the path prefix of pathname is not a directory.\nor\npathname is relative and dirfd is a file descriptor referring to a file other than a directory.";
+					break;
+				case EOVERFLOW:
+					msg += "pathname or fd refers to a file whose size, inode number, or number of blocks cannot be represented in, respectively, the types off_t, ino_t, or blkcnt_t.";
+					break;
+				case EINVAL:
+					msg += "Invalid flag specified in flags.";
+					break;				
+			}
+			return TFALSE;
+		}
+		
+		return TNULL;
 	}
 }

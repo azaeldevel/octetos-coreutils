@@ -27,7 +27,7 @@ namespace coreutils
 {
 	bool Shell::ls(std::list<std::string>& l)
 	{
-		DIR* dircwd = opendir(gcwd());;
+		DIR* dircwd = opendir(cwd().c_str());;
 		struct dirent *entry;
 
   		while((entry = readdir(dircwd)))

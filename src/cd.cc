@@ -28,8 +28,13 @@ namespace coreutils
 {
 
 	bool Shell::cd(const std::string& dir)
-	{		
+	{	
 		int ret = chdir(dir.c_str());
+		
+		char* buf = get_current_dir_name();
+		strcwd = buf;
+		free((void*)buf);
+		
 		if(ret == 0) return true;		
 		return false;
 	}

@@ -29,6 +29,89 @@
 
 namespace coreutils
 {
+	bool Shell::chown(const std::string& fn,uid_t u)
+	{
+		return chown(fn,u,gid());
+	}
+	bool Shell::chown(const std::string& fn)
+	{
+		return chown(fn,uid(),gid());
+	}
+	gid_t Shell::gid() const
+	{
+		return getegid();
+	}
+	
+	bool Shell::chown(const std::string& fn, uid_t u, gid_t g)
+	{
+		
+		/*std::string text = "user :";
+		text += std::to_string(u);
+		text += "\n";
+		echo(text);
+		
+		std::string textg = "group :";
+		textg += std::to_string(g);
+		textg += "\n";
+		echo(textg);*/
+		
+		int ret = ::chown(fn.c_str(),u,g);
+		if(ret == 0) return true;
+		
+		if(errno != 0)
+		{
+			std::string msg = "Fail on floor '";
+			switch(errno)
+			{
+				case EACCES:
+					msg += "Search permission is denied on a component of the path prefix.";
+					break;
+				case EFAULT:
+					msg += "pathname points outside your accessible address space.";
+					break;
+				case ELOOP:
+					msg += "Too many symbolic links were encountered in resolving";
+					break;
+				case ENAMETOOLONG:
+					msg += "pathname is too long";
+					break;
+				case ENOENT:
+					msg += "Insufficient kernel memory was available.";
+					break;
+				case ENOTDIR:
+					msg += "A component of the path prefix is not a directory.\nor \npathname is relative and dirfd is a fil descriptor referring to a file other than a directory.";
+					break;
+				case EPERM:
+					msg += "The calling process did not have the required permissions (see above) to change owner and/or group\nor\nThe file is marked immutable or append-only.";
+					break;
+				case EROFS:
+					msg += "The named file resides on a read-only filesystem.";
+					break;
+				case EBADF:
+					msg += "fd is not a valid open file descriptor.\nor\ndirfd is not a valid file descriptor.";
+					break;
+				case EIO:
+					msg += "A low-level I/O error occurred while modifying the inode.";
+					break;
+				case EINVAL:
+					msg += "Invalid flag specified in flags.";
+					break;				
+			}
+
+			throw octetos::core::Error(msg,errno,__FILE__,__LINE__);
+
+		}
+		
+		return false;
+	}
+	uid_t Shell::uid() const
+	{
+		return geteuid();
+	}
+	void Shell::echo(const std::string& text, std::ostream& o)
+	{
+		o << text;
+	}
 	int Shell::execute(const std::string& cmd)
 	{
 		return system(cmd.c_str());
@@ -41,13 +124,8 @@ namespace coreutils
 			//std::cout << env->name << "=" << env->value.c_str() << "\n";			
 		}
 	}
-	const char* Shell::gcwd()
+	const std::string& Shell::cwd()
 	{
-		if(strcwd != NULL)
-		{
-			free((void*)strcwd);
-		}
-		strcwd = get_current_dir_name();
 		return strcwd;
 	}
 
@@ -70,85 +148,16 @@ namespace coreutils
 		return true;	
 	}
 	
-	/*
-	bool Shell::cwd(const std::string& path)
-	{
-		if(path.empty()) 
-		{
-			if(strcwd and strcwd_malloc)//si tien algun puntero creado con malloc
-			{
-				free((void*)strcwd);
-			}
-			strcwd = getcwd(NULL,0);
-			strcwd_malloc = true;
-			if(strcwd == NULL)
-			{
-				std::string msg = "Falló al leer el directorio de trabajo actual.";
-#if DEBUG
-				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-				octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-				return false;
-			}
-		}
-		else
-		{
-			strcwd = path.c_str();
-			strcwd_malloc = false;
-		}
-		
-
-		//iniciando descriptor de archivo.
-		fdcwd = open(strcwd,O_RDONLY,S_IRUSR | S_IWUSR | S_IXUSR);
-		if(fdcwd == -1)
-		{
-			std::string msg = "Falló al abrir el directorio de trabajo actual.";
-#if DEBUG
-			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-			return false;
-		}
-
-		//cambiando en directorio
-		if(fchdir(fdcwd) == -1)
-		{
-			std::string msg = "Falló al cambiar el directorio de trabajo actual.";
-#if DEBUG
-			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-			return false;
-		}
-
-		
-		//inicando estructura de directorio DIR
-		dircwd = fdopendir(fdcwd);
-		if(dircwd == NULL)
-		{
-			std::string msg = "Falló al abrir el directorio de trabajo actual.";
-#if DEBUG
-			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-			return false;
-		}
-				
-		return true;
-	}
-	*/
+	
 	Shell::Shell(const std::string& default_dir)
 	{
-		strcwd = NULL;
+		//strcwd = NULL;
 		cd(default_dir);
 	}
 	Shell::Shell()
 	{
-		strcwd = NULL;
+		//strcwd = NULL;
+		cd(".");
 	}
 	Shell::~Shell()
 	{

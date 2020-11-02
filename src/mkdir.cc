@@ -22,44 +22,93 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include <fcntl.h> 
 
 #include "shell.hh"
 
 namespace coreutils
 {
-	bool Shell::mkdir(const std::string& name, int mode)
-	{
-		struct stat st = {0};
-		int retMkdir = -1;
+	trilean Shell::mkdir(const std::string& name, int recursive)
+	{				
+		//Precessing	
+		std::string stractual;
+		if(recursive)
+		{
+		   	std::vector<std::string> result;
+		   	std::stringstream s_stream(name); //create string stream from the string
+		   	while(s_stream.good()) 
+		   	{
+			  	std::string substr;
+			  	getline(s_stream, substr, '/'); //get first string delimited by /
+			  	result.push_back(substr);
+		   	}
+		   	
+		   	std::string newpath ;
+		   	for(const std::string& s : result)
+		   	{
+		   		newpath += s;
+		   		//std::cout << newpath << "\n";
+		   		stractual = newpath;
+		   		//std::cout << "\tcomponent :" << s << "\n"; 
+		   		if(exists(newpath) == TFALSE) 
+		   		{
+		   			if(::mkdir(newpath.c_str(),0777) == -1)
+		   			{
+			   			std::string msg = "Fail on calling mkdir : '";
+				   		msg += newpath + "'";
+						octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
+						return TFALSE;
+		   			}
+		   		}
+		   		else
+		   		{
+		   			std::string msg = "File already exists : '";
+			   		msg += newpath + "'";
+					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
+					return TFALSE;
+		   		}
+		   		newpath += "/";
+		   	}
+		   	return TTRUE;
+	   	}
+	   	else
+	   	{
+	   		//std::cout << "Step 1\n";
+	   		std::vector<std::string> result;
+		   	std::stringstream s_stream(name); //create string stream from the string
+		   	//std::cout << "Step 2\n";
+		   	while(s_stream.good()) 
+		   	{
+			  	std::string substr;
+			  	getline(s_stream, substr, '/'); //get first string delimited by /
+			  	result.push_back(substr);
+		   	}
+		   	
+		   	//std::cout << "Step 3\n";
+		   	std::string newpath ;
+		   	for(int i = 0; i < result.size() - 1 ; i++)
+		   	{   		
+		   		newpath += result[i] + "/";
+			   	//std::cout << "Step 4\n";
+			   	if(!exists(newpath)) 
+			   	{
+			   		std::string msg = "No existe el archivo ";
+			   		msg += newpath;
+					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
+					return TFALSE;
+			   	}
+		   	}
+		   	stractual = newpath;
+		   	int ret = ::mkdir(name.c_str(),0777);
+			if(ret == 0) return TTRUE;
+	   	}
 		
-		if(mode == 0)
+		ERROR:
+		//validacion de error
+		if(errno != 0)
 		{
-			retMkdir = ::mkdirat(fdcwd,name.c_str(),0644);
-		}
-		else if (stat(name.c_str(), &st) == -1) 
-		{
-			retMkdir = ::mkdirat(fdcwd,name.c_str(), mode);
-		}
-		else
-		{
-			std::string msg = "Fallo al crear el archivo '";
-			msg += name + "'";
-#if DEBUG
-			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-			return false;
-		}
-		if( retMkdir == 0)
-		{
-			return true;
-		}
-		else
-		{
-			std::string msg = "Fallo al crear el archivo '";
-			msg += name + "' \n\t";
+			std::string msg = "Fail on floor '";
+			msg += stractual + "' \n\t";
 			switch(errno)
 			{
 				case EACCES:
@@ -90,13 +139,11 @@ namespace coreutils
 					msg += "The parent directory resides on a read-only file system";
 					break;
 			}
-#if DEBUG
-			octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
-			octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
-			return false;
+			
+			throw octetos::core::Error(msg,errno,__FILE__,__LINE__);
 		}
+		
+		return false;
 	}
 	
 }
