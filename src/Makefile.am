@@ -1,20 +1,11 @@
 
-AM_CPPFLAGS = \
-	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
-	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
-	$(OCTETOS_COREUTILS_CFLAGS)
-
-AM_CFLAGS =\
-	 -Wall\
-	 -g
 
 lib_LTLIBRARIES = liboctetos-coreutils.la
 
 
 SOURCES = shell.cc ls.cc cd.cc mkdir.cc rm.cc touch.cc rename.cc exists.cc
 
-liboctetos_coreutils_la_LDFLAGS = -static
+liboctetos_coreutils_la_LDFLAGS = -shared -fPIC
 liboctetos_coreutils_la_CPPFLAGS =  $(OCTETOS_CORE_CFLAGS)
 liboctetos_coreutils_la_LIBADD = $(OCTETOS_CORE_LIBS)
 liboctetos_coreutils_la_SOURCES = $(SOURCES)
