@@ -44,9 +44,8 @@ namespace coreutils
 		len = GetCurrentDirectory(len,buf);
 		delete buf;
 		GetCurrentDirectory(len,buf);
-
 		#else
-		char* buf = getwd();
+		char* buf = get_current_dir_name();
 		#endif
 		strcwd = buf;
 		free((void*)buf);
