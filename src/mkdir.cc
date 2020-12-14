@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  This file is part of octetos-coreutils.
  *  octetos-coreutils is a library C++ for coreuitls funtions.
  *  Copyright (C) 2020  Azael Reyes
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,37 +16,37 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * */
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <fcntl.h> 
+#include <fcntl.h>
 
 #include "shell.hh"
 
 namespace coreutils
 {
 	trilean Shell::mkdir(const std::string& name, int recursive)
-	{				
-		//Precessing	
+	{
+		//Precessing
 		std::string stractual;
 		if(recursive)
 		{
 		   	std::vector<std::string> result;
 		   	std::stringstream s_stream(name); //create string stream from the string
-		   	while(s_stream.good()) 
+		   	while(s_stream.good())
 		   	{
 			  	std::string substr;
 			  	getline(s_stream, substr, '/'); //get first string delimited by /
 			  	result.push_back(substr);
 		   	}
-		   	
+
 		   	std::string newpath ;
 		   	for(const std::string& s : result)
 		   	{
-		   		if(s.empty() or s.size() == 0) 
+		   		if(s.empty() or s.size() == 0)
 		   		{
 		   			newpath += "/";
 		   			continue;
@@ -54,14 +54,23 @@ namespace coreutils
 		   		else
 		   		{
 		   			newpath += s;
-		   		}		   		
-		   		
+		   		}
+
 		   		std::cout << newpath << "\n";
 		   		stractual = newpath;
-		   		//std::cout << "\tcomponent :" << s << "\n"; 
+		   		//std::cout << "\tcomponent :" << s << "\n";
 		   		trilean ret = exists(newpath);
-		   		if( ret == TNULL) 
+		   		if( ret == TNULL)
 		   		{
+		   		    #ifdef WINDOWS_MINGW
+		   			if(::mkdir(newpath.c_str()) == -1)
+		   			{
+			   			std::string msg = "Fail on calling mkdir : '";
+				   		msg += newpath + "'";
+						octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
+						return TFALSE;
+		   			}
+		   			#else
 		   			if(::mkdir(newpath.c_str(),0777) == -1)
 		   			{
 			   			std::string msg = "Fail on calling mkdir : '";
@@ -69,12 +78,13 @@ namespace coreutils
 						octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
 						return TFALSE;
 		   			}
+		   			#endif
 		   		}
-		   		else if( ret == TFALSE) 
+		   		else if( ret == TFALSE)
 		   		{
 		   			return TFALSE;
 		   		}
-		   		
+
 		   		newpath += "/";
 		   	}
 		   	return TTRUE;
@@ -85,37 +95,41 @@ namespace coreutils
 	   		std::vector<std::string> result;
 		   	std::stringstream s_stream(name); //create string stream from the string
 		   	//std::cout << "Step 2\n";
-		   	while(s_stream.good()) 
+		   	while(s_stream.good())
 		   	{
 			  	std::string substr;
 			  	getline(s_stream, substr, '/'); //get first string delimited by /
 			  	result.push_back(substr);
 		   	}
-		   	
+
 		   	//std::cout << "Step 3\n";
 		   	std::string newpath ;
 		   	for(int i = 0; i < result.size() - 1 ; i++)
-		   	{   		
+		   	{
 		   		newpath += result[i] + "/";
 			   	//std::cout << "Step 4\n";
 			   	trilean ret = exists(newpath);
-		   		if( ret == TNULL) 
+		   		if( ret == TNULL)
 			   	{
 			   		std::string msg = "No existe el archivo ";
 			   		msg += newpath;
 					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
 					return TFALSE;
 			   	}
-		   		else if( ret == TFALSE) 
+		   		else if( ret == TFALSE)
 		   		{
 		   			return TFALSE;
 		   		}
 		   	}
 		   	stractual = newpath;
+		   	#ifdef WINDOWS_MINGW
+                int ret = ::mkdir(name.c_str());
+		   	#else
 		   	int ret = ::mkdir(name.c_str(),0777);
+		   	#endif // WINDOWS_MINGW
 			if(ret == 0) return TTRUE;
 	   	}
-		
+
 		ERROR:
 		//validacion de error
 		if(errno != 0)
@@ -152,11 +166,11 @@ namespace coreutils
 					msg += "The parent directory resides on a read-only file system";
 					break;
 			}
-			
+
 			throw octetos::core::Error(msg,errno,__FILE__,__LINE__);
 		}
-		
+
 		return false;
 	}
-	
+
 }

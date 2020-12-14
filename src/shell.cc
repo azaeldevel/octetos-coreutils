@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  This file is part of octetos-coreutils.
  *  octetos-coreutils is a library C++ for coreuitls funtions.
  *  Copyright (C) 2020  Azael Reyes
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * */
 
 #include <unistd.h>
@@ -24,11 +24,16 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "config.h"
+#ifdef HAVE_CONFIG_H
+    #include "config.h"
+#elif defined WINDOWS_MINGW && defined CODEBLOCKS
+    #include "config-cb.h"
+#endif
 #include "shell.hh"
 
 namespace coreutils
 {
+    #ifndef WINDOWS_MINGW
 	bool Shell::chown(const std::string& fn,uid_t u)
 	{
 		return chown(fn,u,gid());
@@ -41,23 +46,22 @@ namespace coreutils
 	{
 		return getegid();
 	}
-	
 	bool Shell::chown(const std::string& fn, uid_t u, gid_t g)
 	{
-		
+
 		/*std::string text = "user :";
 		text += std::to_string(u);
 		text += "\n";
 		echo(text);
-		
+
 		std::string textg = "group :";
 		textg += std::to_string(g);
 		textg += "\n";
 		echo(textg);*/
-		
+
 		int ret = ::chown(fn.c_str(),u,g);
 		if(ret == 0) return true;
-		
+
 		if(errno != 0)
 		{
 			std::string msg = "Fail on floor '";
@@ -95,19 +99,21 @@ namespace coreutils
 					break;
 				case EINVAL:
 					msg += "Invalid flag specified in flags.";
-					break;				
+					break;
 			}
 
 			throw octetos::core::Error(msg,errno,__FILE__,__LINE__);
 
 		}
-		
+
 		return false;
 	}
 	uid_t Shell::uid() const
 	{
 		return geteuid();
 	}
+    #endif
+
 	void Shell::echo(const std::string& text, std::ostream& o)
 	{
 		o << text;
@@ -120,8 +126,11 @@ namespace coreutils
 	{
 		for(const Enviroment* env : v)
 		{
-			setenv(env->name.c_str(),env->value.c_str(),1);
-			//std::cout << env->name << "=" << env->value.c_str() << "\n";			
+            #ifdef WINDOWS_MINGW
+                _putenv((env->name + "=" + env->value).c_str());
+			#else
+                setenv(env->name.c_str(),env->value.c_str(),1);
+		    #endif
 		}
 	}
 	const std::string& Shell::cwd()
@@ -136,19 +145,19 @@ namespace coreutils
 		packinfo.brief = "Similar to coreutils but is a C++ API.";
 		packinfo.url = "https://github.com/azaeldevel/octetos-coreutils.git";
 		packinfo.name_decorated = "Libreria coreutils de Octetos";
-		
+
 		packinfo.version.set(VERSION);
-		
-		packinfo.licence.type = octetos::core::Licence::Type::GPLv3;		
+
+		packinfo.licence.type = octetos::core::Licence::Type::GPLv3;
 		packinfo.licence.name_public = PACKAGE;
 		packinfo.licence.owner = "Azael Reyes";
 		packinfo.licence.year = 2019;
         packinfo.licence.contact = "azael.devel@gmail.com";
-		
-		return true;	
+
+		return true;
 	}
-	
-	
+
+
 	Shell::Shell(const std::string& default_dir)
 	{
 		//strcwd = NULL;
@@ -161,11 +170,11 @@ namespace coreutils
 	}
 	Shell::~Shell()
 	{
-		
+
 	}
 	Error::Error(const std::string& msg) throw() : octetos::core::Error(msg)
 	{
-		
+
 	}
 
 }

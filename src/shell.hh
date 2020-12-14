@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  This file is part of octetos-coreutils.
  *  octetos-coreutils is a library C++ for coreuitls funtions.
  *  Copyright (C) 2020  Azael Reyes
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * */
 
 #ifndef APISHELL_HH
@@ -24,8 +24,13 @@
 
 #include <string>
 #include <list>
-#include <octetos/core/Error.hh>
-#include <octetos/core/Artifact.hh>
+#if defined WINDOWS_MINGW
+    #include <Error.hh>
+    #include <Artifact.hh>
+#else
+    #include <octetos/core/Error.hh>
+    #include <octetos/core/Artifact.hh>
+#endif
 #include <dirent.h>
 #include <stdlib.h>
 #include <iostream>
@@ -39,7 +44,7 @@
 
 namespace coreutils
 {
-	
+
 	typedef signed char trilean;
 
 	/**
@@ -53,25 +58,25 @@ namespace coreutils
 		std::string value;
 	};
 
-	class Error : public octetos::core::Error
+	class DECLSPCE_DLL Error : public octetos::core::Error
 	{
 	public:
 		Error(const std::string&) throw();
-	};	
+	};
 
-	class Shell
+	class DECLSPCE_DLL Shell
 	{
 	private:
-		
+
 		std::string strcwd;
 		int fdcwd;
 		/**
 		* \brief Inidca si strcdw fua asignada con malloc
 		*/
 		bool strcwd_malloc;
-		
+
 		//bool cwd(const std::string& = "");
-		
+
 	public:
 		Shell();
 		Shell(const std::string&);
@@ -95,16 +100,18 @@ namespace coreutils
 		const std::string& cwd();
 		void set(std::vector<Enviroment*>);
 		int execute(const std::string&);
-		int chmod(const std::string&,int mode);
 		void echo(const std::string&, std::ostream& out = std::cout);
+		#ifndef WINDOWS_MINGW
+		int chmod(const std::string&,int mode);
 		uid_t uid() const;
 		gid_t gid() const;
 		bool chown(const std::string& fn,uid_t ,gid_t);
 		bool chown(const std::string& fn,uid_t);
 		bool chown(const std::string& fn);
+		#endif
 	};
 
 
-} 
+}
 
 #endif

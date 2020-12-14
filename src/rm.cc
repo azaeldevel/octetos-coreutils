@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  This file is part of octetos-coreutils.
  *  octetos-coreutils is a library C++ for coreuitls funtions.
  *  Copyright (C) 2020  Azael Reyes
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * */
 
 #include <stdio.h>
@@ -24,7 +24,13 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#ifdef WINDOWS_MINGW
+    #include <windows.h>
+    #include <winuser.h>
+    #include <fileapi.h>
+    #include <windef.h>
+    #include <setupapi.h>
+#endif
 #include "shell.hh"
 
 namespace coreutils
@@ -36,26 +42,28 @@ namespace coreutils
 		if(fd == -1)
 		{
 			return false;
-		}		
+		}
 		if(fstat (fd, &buf) == -1)
 		{
 			return false;
 		}
 		//close(fd);
 
+#ifdef WINDOWS_MINGW
+        return DeleteFileA(path.c_str());
+#else
 		if (S_ISLNK(buf.st_mode) or S_ISREG(buf.st_mode))//es link?
 		{//es un link
 			int retRm = unlinkat(fdcwd,path.c_str(),0);
-			if(retRm == 0) 
+			if(retRm == 0)
 			{
 				return true;
 			}
-			else if(retRm == -1) 
+			else if(retRm == -1)
 			{
 				std::string msg = "Fallo eliminar link '";
 				msg += path + "'";
-				
-#if DEBUG
+    #if DEBUG
 				msg += "\n\t";
 				switch(errno)
 				{
@@ -97,24 +105,24 @@ namespace coreutils
 						break;
 				}
 				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
+    #else
 				octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
+    #endif
 				return false;
 			}
 		}
 		else if (S_ISDIR(buf.st_mode))//es un directorio?
 		{
 			int retRm = rmdir(path.c_str());
-			if(retRm == 0) 
+			if(retRm == 0)
 			{
 				return true;
 			}
-			else if(retRm == -1) 
+			else if(retRm == -1)
 			{
 				std::string msg = "Fallo eliminar directorio '";
 				msg += path + "'";
-#if DEBUG
+    #if DEBUG
 				msg += "\n\t";
 				switch(errno)
 				{
@@ -156,12 +164,14 @@ namespace coreutils
 						break;
 				}
 				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
-#else
+    #else
 				octetos::core::Error::write(octetos::core::Error(msg,errno));
-#endif
+    #endif
 				return false;
 			}
 		}
+#endif
+
 
 		std::string msg = "Tipó de archivo desconocido '";
 		msg += path + "'";
@@ -171,6 +181,6 @@ namespace coreutils
 		octetos::core::Error::write(octetos::core::Error(msg,errno));
 #endif
 		return false;
-		
+
 	}
 }

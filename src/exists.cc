@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  This file is part of octetos-coreutils.
  *  octetos-coreutils is a library C++ for coreuitls funtions.
  *  Copyright (C) 2020  Azael Reyes
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * */
 
 
@@ -33,7 +33,13 @@ namespace coreutils
 	   	int ret = stat( filename.c_str(), &info );
 		if( ret == 0 )
 		{
-			if( (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT) || (info.st_mode && S_IFLNK))
+		    int mode;
+		    #ifdef WINDOWS_MINGW
+		    mode = (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT);
+		    #else
+		    mode = (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT) || (info.st_mode && S_IFLNK);
+		    #endif
+			if( mode )
 			{
 				return TTRUE;
 			}
@@ -70,12 +76,12 @@ namespace coreutils
 					break;
 				case EINVAL:
 					msg += "Invalid flag specified in flags.";
-					break;				
+					break;
 			}
 			octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
 			return TFALSE;
 		}
-		
+
 		return TNULL;
 	}
 }
