@@ -114,11 +114,10 @@ namespace coreutils
 						msg += "The O_NONBLOCK flag was specified, and an incompatible lease was held on the file (see fcntl(2)).";
 						break;
 				}
-				octetos::core::Error::write(octetos::core::Error(msg,errno,__FILE__,__LINE__));
+				throw octetos::core::Exception(msg,__FILE__,__LINE__);
 #else
-				octetos::core::Error::write(octetos::core::Error(msg,errno));
+				throw octetos::core::Exception(msg,__FILE__,__LINE__);
 #endif
-				return false;
 			}
 		}
 		
