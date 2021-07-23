@@ -28,7 +28,7 @@
 
 namespace coreutils
 {
-	trilean Shell::mkdir(const std::string& name, int recursive)
+	bool Shell::mkdir(const std::string& name, int recursive)
 	{
 		//Precessing
 		std::string stractual;
@@ -56,38 +56,37 @@ namespace coreutils
 		   			newpath += s;
 		   		}
 
-		   		std::cout << newpath << "\n";
+		   		//std::cout << newpath << "\n";
 		   		stractual = newpath;
 		   		//std::cout << "\tcomponent :" << s << "\n";
-		   		trilean ret = exists(newpath);
-		   		if( ret == TNULL)
+		   		bool ret = exists(newpath);
+		   		if( ret == false)
 		   		{
 		   		    #ifdef WINDOWS_MINGW
 		   			if(::mkdir(newpath.c_str()) == -1)
 		   			{
 			   			std::string msg = "Fail on calling mkdir : '";
 				   		msg += newpath + "'";
-						octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-						return TFALSE;
+						throw octetos::core::Exception(msg,__FILE__,__LINE__);
 		   			}
 		   			#else
 		   			if(::mkdir(newpath.c_str(),0777) == -1)
 		   			{
 			   			std::string msg = "Fail on calling mkdir : '";
 				   		msg += newpath + "'";
-						octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-						return TFALSE;
+						octetos::core::Exception(msg,__FILE__,__LINE__);
+						return false;
 		   			}
 		   			#endif
 		   		}
-		   		else if( ret == TFALSE)
+		   		else if( ret == false)
 		   		{
-		   			return TFALSE;
+		   			return false;
 		   		}
 
 		   		newpath += "/";
 		   	}
-		   	return TTRUE;
+		   	return true;
 	   	}
 	   	else
 	   	{
@@ -109,16 +108,16 @@ namespace coreutils
 		   		newpath += result[i] + "/";
 			   	//std::cout << "Step 4\n";
 			   	trilean ret = exists(newpath);
-		   		if( ret == TNULL)
+		   		if( ret == false)
 			   	{
 			   		std::string msg = "No existe el archivo ";
 			   		msg += newpath;
 					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-					return TFALSE;
+					return false;
 			   	}
-		   		else if( ret == TFALSE)
+		   		else if( ret == false)
 		   		{
-		   			return TFALSE;
+		   			return false;
 		   		}
 		   	}
 		   	stractual = newpath;
@@ -127,7 +126,7 @@ namespace coreutils
 		   	#else
 		   	int ret = ::mkdir(name.c_str(),0777);
 		   	#endif // WINDOWS_MINGW
-			if(ret == 0) return TTRUE;
+			if(ret == 0) return true;
 	   	}
 
 		ERROR:
@@ -167,7 +166,7 @@ namespace coreutils
 					break;
 			}
 
-			throw octetos::core::Error(msg,errno,__FILE__,__LINE__);
+			throw octetos::core::Exception(msg,__FILE__,__LINE__);
 		}
 
 		return false;

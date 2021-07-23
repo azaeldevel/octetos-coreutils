@@ -27,7 +27,7 @@
 
 namespace coreutils
 {
-	trilean Shell::exists(const std::string& filename)
+	bool Shell::exists(const std::string& filename)
 	{
 	   	struct stat info;
 	   	int ret = stat( filename.c_str(), &info );
@@ -41,7 +41,7 @@ namespace coreutils
 		    #endif
 			if( mode )
 			{
-				return TTRUE;
+				return true;
 			}
 		}
 		else
@@ -67,10 +67,10 @@ namespace coreutils
 					break;
 				case ENOENT:
 					//msg += "A component of pathname does not exist or is a dangling symbolic link.\nor\npathname is an empty string and AT_EMPTY_PATH was not specified in flags.\nor\nOut of memory (i.e., kernel memory).";
-					return TNULL;
+					return false;
 				case ENOTDIR:
 					msg += "A component of the path prefix of pathname is not a directory.\nor\npathname is relative and dirfd is a file descriptor referring to a file other than a directory.";
-					return TNULL;
+					break;
 				case EOVERFLOW:
 					msg += "pathname or fd refers to a file whose size, inode number, or number of blocks cannot be represented in, respectively, the types off_t, ino_t, or blkcnt_t.";
 					break;
@@ -78,10 +78,9 @@ namespace coreutils
 					msg += "Invalid flag specified in flags.";
 					break;
 			}
-			octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-			return TFALSE;
+			throw octetos::core::Exception(msg,__FILE__,__LINE__);
 		}
 
-		return TNULL;
+		return false;
 	}
 }

@@ -15,26 +15,60 @@ void funciotns()
 {
 	coreutils::Shell shell;
 	
-	shell.echo("Begin test.\n");
-	
+	/*shell.echo("Begin test.\n");	
 	shell.echo("In ");
 	shell.echo(shell.cwd());
-	shell.echo("\n");
+	shell.echo("\n");*/
 	
-	
-	/*if(shell.mkdir("test12",false) == TTRUE)
+	if(shell.exists("src"))
 	{
 		CU_ASSERT(true);
 	}
-	else
+	else 
 	{
-		std::cout << "Fallo la creación de archivo\n";
 		CU_ASSERT(false);
-		if(octetos::core::Error::check())
+	}
+	if(shell.exists("/usr"))
+	{
+		CU_ASSERT(true);
+	}
+	else 
+	{
+		CU_ASSERT(false);
+	}
+	
+	if(shell.exists("Debug"))
+	{
+		if(shell.mkdir("Debug/test1",false))
 		{
-			std::cerr << (std::string)octetos::core::Error::get() << "\n";			
-		}	
-	}*/
+			CU_ASSERT(true);
+		}
+		else
+		{
+			//std::cout << "Fallo la creación de archivo\n";
+			CU_ASSERT(false);
+		}
+		
+		if(shell.mkdir("Debug/test2",false))
+		{
+			CU_ASSERT(true);
+		}
+		else
+		{
+			//std::cout << "Fallo la creación de archivo\n";
+			CU_ASSERT(false);
+		}
+		
+		if(shell.mkdir("Debug/test3",false))
+		{
+			CU_ASSERT(true);
+		}
+		else
+		{
+			//std::cout << "Fallo la creación de archivo\n";
+			CU_ASSERT(false);
+		}
+	}
 	
 	
 	/*shell.echo("In ");

@@ -37,9 +37,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define TTRUE 1
-#define TFALSE -1
-#define TNULL 0
+//#define TTRUE 1
+//#define TFALSE -1
+//#define TNULL 0
 
 
 namespace coreutils
@@ -87,7 +87,7 @@ namespace coreutils
 		*
 		*\return TTRUE if file exists, TNULL is not exists and TFALSE if error.
 		*/
-		trilean mkdir(const std::string&, int recursive=false);
+		bool mkdir(const std::string&, int recursive=false);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
 		bool touch(const std::string&, int options = 0);
@@ -96,7 +96,7 @@ namespace coreutils
 		*
 		*\return TTRUE if file exists, TNULL is not exists and TFALSE if error.
 		*/
-		trilean exists(const std::string&);
+		bool exists(const std::string&);
 		const std::string& cwd();
 		void set(std::vector<Enviroment*>);
 		int execute(const std::string&);

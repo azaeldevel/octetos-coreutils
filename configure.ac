@@ -1,6 +1,6 @@
 
 
-AC_INIT(octetos-coreutils, 0.13.0-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-coreutils, 0.15.0-alpha,azael.devel@gmail.com)
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11])
 AM_SILENT_RULES([yes])
@@ -26,34 +26,40 @@ dnl ***************************************************************************
 dnl ***************************************************************************
 dnl Check for Windows
 dnl ***************************************************************************
-AC_CANONICAL_HOST
+dnl AC_CANONICAL_HOST
 
-case $host_os in
-  *mingw*)
-    platform_win32=yes
-    native_win32=yes
-    ;;
-  pw32* | *cygwin*)
-    platform_win32=yes
-    native_win32=no
-    ;;
-  *)
-    platform_win32=no
-    native_win32=no
-    ;;
-esac
-AM_CONDITIONAL(PLATFORM_WIN32, test x"$platform_win32" = "xyes")
-AM_CONDITIONAL(NATIVE_WIN32, test x"$native_win32" = "xyes")
+dnl case $host_os in
+dnl   *mingw*)
+dnl     platform_win32=yes
+dnl     native_win32=yes
+dnl     ;;
+dnl   pw32* | *cygwin*)
+dnl     platform_win32=yes
+dnl     native_win32=no
+dnl     ;;
+dnl   *)
+dnl     platform_win32=no
+dnl     native_win32=no
+dnl     ;;
+dnl esac
+dnl AM_CONDITIONAL(PLATFORM_WIN32, test x"$platform_win32" = "xyes")
+dnl AM_CONDITIONAL(NATIVE_WIN32, test x"$native_win32" = "xyes")
 
 
-LT_INIT([win32-dll])
+LT_INIT
 
 
 PKG_CHECK_MODULES([CHECK], [check])
 
-PKG_CHECK_MODULES(CUNIT, [cunit ])
+#PKG_CHECK_MODULES(CUNIT, [cunit ])
 
 PKG_CHECK_MODULES(OCTETOS_CORE, [octetos-core])
+
+AM_CONDITIONAL(WITH_TESTS, test x"$with_tests" = "xyes")
+AC_ARG_WITH([tests], AS_HELP_STRING([--with-tests], [Compilando con soporte para Tests]))
+if test "x$with_tests" = "xyes"; then 
+	PKG_CHECK_MODULES(CUNIT,cunit)
+fi
 
 
 AC_OUTPUT([
