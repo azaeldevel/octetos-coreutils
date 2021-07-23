@@ -81,13 +81,16 @@ namespace coreutils
 		Shell();
 		Shell(const std::string&);
 		~Shell();
+		/**
+		*\brief list files in current work directory
+		*/
 		bool ls(std::list<std::string>&);
 		bool cd(const std::string&);
 		/**
 		*
 		*\return TTRUE if file exists, TNULL is not exists and TFALSE if error.
 		*/
-		bool mkdir(const std::string&, int recursive=false);
+		bool mkdir(const std::string&, bool recursive=false);
 		bool rm(const std::string&);
 		bool rename(const std::string&,const std::string&);
 		bool touch(const std::string&, int options = 0);

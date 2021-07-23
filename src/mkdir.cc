@@ -28,7 +28,7 @@
 
 namespace coreutils
 {
-	bool Shell::mkdir(const std::string& name, int recursive)
+	bool Shell::mkdir(const std::string& name, bool recursive)
 	{
 		//Precessing
 		std::string stractual;
@@ -46,7 +46,7 @@ namespace coreutils
 		   	std::string newpath ;
 		   	for(const std::string& s : result)
 		   	{
-		   		if(s.empty() or s.size() == 0)
+		   		if(s.empty())
 		   		{
 		   			newpath += "/";
 		   			continue;
@@ -58,9 +58,9 @@ namespace coreutils
 
 		   		//std::cout << newpath << "\n";
 		   		stractual = newpath;
-		   		//std::cout << "\tcomponent :" << s << "\n";
+		   		//std::cout << "\tstractual :" << stractual << "\n";
 		   		bool ret = exists(newpath);
-		   		if( ret == false)
+		   		if( ret == false )
 		   		{
 		   		    #ifdef WINDOWS_MINGW
 		   			if(::mkdir(newpath.c_str()) == -1)
@@ -78,10 +78,6 @@ namespace coreutils
 						return false;
 		   			}
 		   			#endif
-		   		}
-		   		else if( ret == false)
-		   		{
-		   			return false;
 		   		}
 
 		   		newpath += "/";
@@ -107,18 +103,13 @@ namespace coreutils
 		   	{
 		   		newpath += result[i] + "/";
 			   	//std::cout << "Step 4\n";
-			   	trilean ret = exists(newpath);
+			   	bool ret = exists(newpath);
 		   		if( ret == false)
 			   	{
 			   		std::string msg = "No existe el archivo ";
 			   		msg += newpath;
-					octetos::core::Error::write(octetos::core::Error(msg,0,__FILE__,__LINE__));
-					return false;
+					throw octetos::core::Exception(msg,__FILE__,__LINE__);
 			   	}
-		   		else if( ret == false)
-		   		{
-		   			return false;
-		   		}
 		   	}
 		   	stractual = newpath;
 		   	#ifdef WINDOWS_MINGW

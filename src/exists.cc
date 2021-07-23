@@ -30,21 +30,27 @@ namespace coreutils
 	bool Shell::exists(const std::string& filename)
 	{
 	   	struct stat info;
+	   	int mode;
 	   	int ret = stat( filename.c_str(), &info );
-		if( ret == 0 )
+	   	if(ret == 0 and S_ISDIR(info.st_mode))
+	   	{
+	   		return true;
+	   	}
+	   	
+	   	if( ret == 0 )
 		{
-		    int mode;
 		    #ifdef WINDOWS_MINGW
-		    mode = (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT);
+		    mode = (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT);
 		    #else
-		    mode = (info.st_mode && S_IFDIR ) || (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT) || (info.st_mode && S_IFLNK);
+		    mode = (info.st_mode && S_IFREG)  || (info.st_mode && S_IFMT) || (info.st_mode && S_IFLNK);
 		    #endif
 			if( mode )
 			{
 				return true;
 			}
 		}
-		else
+		/*
+		if(ret == -1)
 		{
 			std::string msg = "Fail on floor : '";
 			msg += filename + "'\n";
@@ -79,7 +85,7 @@ namespace coreutils
 					break;
 			}
 			throw octetos::core::Exception(msg,__FILE__,__LINE__);
-		}
+		}*/
 
 		return false;
 	}

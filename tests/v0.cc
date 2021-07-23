@@ -39,7 +39,27 @@ void funciotns()
 	
 	if(shell.exists("Debug"))
 	{
-		if(shell.mkdir("Debug/test1",false))
+		if(shell.mkdir("Debug/test1",true))
+		{
+			CU_ASSERT(true);
+			if(shell.mkdir("Debug/test1/1.1/.1.1.1",true))
+			{
+				CU_ASSERT(true);
+			}
+			else
+			{
+				//std::cout << "Fallo la creación de archivo\n";
+				CU_ASSERT(false);
+			}
+		}
+		else
+		{
+			//std::cout << "Fallo la creación de archivo\n";
+			CU_ASSERT(false);
+		}
+		
+		
+		if(shell.mkdir("Debug/test2",true))
 		{
 			CU_ASSERT(true);
 		}
@@ -49,17 +69,7 @@ void funciotns()
 			CU_ASSERT(false);
 		}
 		
-		if(shell.mkdir("Debug/test2",false))
-		{
-			CU_ASSERT(true);
-		}
-		else
-		{
-			//std::cout << "Fallo la creación de archivo\n";
-			CU_ASSERT(false);
-		}
-		
-		if(shell.mkdir("Debug/test3",false))
+		if(shell.mkdir("Debug/test3",true))
 		{
 			CU_ASSERT(true);
 		}
