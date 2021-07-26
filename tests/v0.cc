@@ -62,6 +62,14 @@ void funciotns()
 		if(shell.mkdir("Debug/test2",true))
 		{
 			CU_ASSERT(true);
+			if(shell.rm("Debug/test2"))
+			{
+				CU_ASSERT(true);
+			}
+			else
+			{
+				CU_ASSERT(false);
+			}
 		}
 		else
 		{
